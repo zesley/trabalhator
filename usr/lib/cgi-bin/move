@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo /home/wesley/usb-otg/move.sh $QUERY_STRING > /dev/null 2>&1 &
+sudo /etc/trabalhator/move.sh $QUERY_STRING > /dev/null 2>&1 &
 echo 'Content-type: application/json'
 echo ''
 echo '{ "moved": "true" }'

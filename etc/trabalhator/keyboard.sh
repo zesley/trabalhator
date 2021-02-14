@@ -1,7 +1,7 @@
 #!/bin/bash
 
 type() {
-  echo $1 | /home/wesley/usb-otg/hid_gadget_test /dev/hidg0 > /dev/null 2>&1
+  echo $1 | /etc/trabalhator/hid_gadget_test /dev/hidg0 > /dev/null 2>&1
   sleep $2
 }
 

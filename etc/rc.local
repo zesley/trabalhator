@@ -12,6 +12,6 @@
 # By default this script does nothing.
 
 # Load USB Script
-/usr/bin/isticktoit_usb
+/etc/trabalhator/isticktoit_usb
 
 exit 0
