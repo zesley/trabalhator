@@ -3,6 +3,8 @@
 run() {
   ts=`date +%s%N`
 
+  echo $1 | sed 's/coords=//' | sed 's/\%22//g'
+
   move=(`echo $1 | sed 's/coords=//' | sed 's/\%22//g' | sed 's/{//g' | sed 's/}//g' | sed 's/x//g' | sed 's/y//g' |  sed 's/://g' | sed 's/,/\n/g'`)
 
   b=${move[0]}
@@ -24,12 +26,11 @@ run() {
     else
       if [ $x -lt -127 ]; then
         x=-127
-      else
-        x=$((255+$x))
       fi
+      x=$((256+$x))
     fi
   fi
-  x=`echo "obase=16; ibase=10; $x" | bc`
+  x=`echo "obase=16; ibase=10; $x" | bc | sed 's/-//g' `
   y=${move[2]}
   if [ $y -ne 0 ]; then
     if [ $y -gt 0 ]; then
@@ -39,12 +40,11 @@ run() {
     else
       if [ $y -lt -127 ]; then
         y=-127
-      else
-        y=$((255+$y))
       fi
+      y=$((256+$y))
     fi
   fi
-  y=`echo "obase=16; ibase=10; $y" | bc`
+  y=`echo "obase=16; ibase=10; $y" | bc | sed 's/-//g' `
 
   echo -ne "\\x$b\\x$x\\x$y" > /dev/hidg1
 
