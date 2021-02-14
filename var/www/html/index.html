@@ -173,60 +173,72 @@
           }
         });
 
+        var moving=false;
         var bx=0;
         var by=0;
-        var ex=0;
-        var ey=0;
 
-        $("#touchpad").mousedown(function(e) {
+        $("#touchpad").on("mousedown",function(e) {
           e.preventDefault();
           bx=e.offsetX;
           by=e.offsetY;
+          moving=true;
         });
 
-        $("#touchpad").mousemove(function(e) {
+        $("#touchpad").on("mousemove", function(e) {
           e.preventDefault();
-          ex=e.offsetX;
-          ey=e.offsetY;
+          var cx = e.offsetX;
+          var cy = e.offsetY;
+          if (moving && (cx != bx || cy != by)) {
+            sendMove(cx - bx, cy - by);
+            bx=cx;
+            by=cy;
+          }
         });
 
-        $("#touchpad").mouseup(function(e) {
+        $("#touchpad").on("mouseup", function(e) {
           e.preventDefault();
-          sendMove();
+          moving=false;
         });
 
         $("#touchpad").on('touchstart', function(e) {
           e.preventDefault();
-          var touch = e.touches[0];
-          bx=touch.pageX;
-          by=touch.pageY;
+          bx=e.touches[0].pageX;
+          by=e.touches[0].pageY;
+          moving=true;
         });
         
         $("#touchpad").on('touchmove', function(e) {
           e.preventDefault();
-          var touch = e.touches[0];
-          ex=touch.pageX;
-          ey=touch.pageY;
+          var cx = e.touches[0].pageX;
+          var cy = e.touches[0].pageY;
+          if (moving && (cx != bx || cy != by)) {
+            sendMove(cx - bx, cy - by);
+            bx=cx;
+            by=cy;
+          }
         });
-        
+
         $("#touchpad").on('touchend', function(e) {
           e.preventDefault();
-          sendMove();
+          moving=false;
         });
-
-        function sendMove() {
-          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasControl ? 1 : 0, x: parseInt(ex - bx), y: parseInt(ey - by) }));
+      
+        function sendMove(x, y) {
+          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasControl ? 1 : 0, x: parseInt(x), y: parseInt(y) }));
         }
 
-        $("#b1").click(function() {
+        $("#b1").click(function(e) {
+          e.preventDefault();
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 1, x: 0, y: 0 }));
         });
 
-        $("#b2").click(function() {
+        $("#b2").click(function(e) {
+          e.preventDefault();
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 2, x: 0, y: 0 }));
         });
 
-        $("#b2").click(function() {
+        $("#b2").click(function(e) {
+          e.preventDefault();
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 3, x: 0, y: 0 }));
         });
 
