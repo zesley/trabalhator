@@ -27,3 +27,12 @@ dtc -I dts /boot/dtb/sun8i-h3-orangepi-plus.dts -O dtb -o /boot/dtb/sun8i-h3-ora
 TO /boot/armbianEnv.txt ADD overlays=usbhost0
 
 make hid_gadget_test
+
+sudo visudo
+
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/stop_keyboard.sh
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/start_keyboard.sh
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/stop_mouse.sh
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/start_mouse.sh
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/type.sh
+www-data ALL=(root) NOPASSWD: /etc/trabalhator/move.sh
