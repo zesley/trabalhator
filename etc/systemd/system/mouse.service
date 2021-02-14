@@ -1,0 +1,12 @@
+[Unit]
+Description=Keyboard Daemon
+
+[Service]
+ExecStart=/bin/bash -c '/home/wesley/usb-otg/mouse.sh start'
+ExecStop=/bin/kill -9 $MAINPID
+ExecStop=/bin/bash -c '/home/wesley/usb-otg/mouse.sh stop'
+Restart=no
+User=root
+
+[Install]
+WantedBy=multi-user.target 

@@ -1,0 +1,11 @@
+#!/bin/bash
+ks=`systemctl status keyboard.service | grep "Active:" | awk '{ print $2 } '`
+if [ "$ks" != "active" ]; then
+  sudo /home/wesley/usb-otg/start_keyboard.sh > /dev/null 2>&1 &
+fi
+echo 'Content-type: application/json'
+echo ''
+echo '{'
+echo ' "keyboard": { "status": "active" }'
+echo '}'
+echo ''

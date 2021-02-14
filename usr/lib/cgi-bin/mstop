@@ -1,0 +1,11 @@
+#!/bin/bash
+ms=`systemctl status mouse.service | grep "Active:" | awk '{ print $2 } '`
+if [ "$ms" = "active" ]; then
+  sudo /home/wesley/usb-otg/stop_mouse.sh > /dev/null 2>&1 &
+fi
+echo 'Content-type: application/json'
+echo ''
+echo '{'
+echo ' "mouse": { "status": "inactive" }'
+echo '}'
+echo ''
