@@ -173,19 +173,50 @@
           }
         });
 
-        var coordx=0;
-        var coordy=0;
+        var bx=0;
+        var by=0;
+        var ex=0;
+        var ey=0;
 
         $("#touchpad").mousedown(function(e) {
-          coordx=e.offsetX;
-          coordy=e.offsetY;
+          e.preventDefault();
+          bx=e.offsetX;
+          by=e.offsetY;
+        });
+
+        $("#touchpad").mousemove(function(e) {
+          e.preventDefault();
+          ex=e.offsetX;
+          ey=e.offsetY;
         });
 
         $("#touchpad").mouseup(function(e) {
-          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasControl ? 1 : 0, x: e.offsetX - coordx, y: e.offsetY - coordy }));
-          coordx=0;
-          coordy=0;
+          e.preventDefault();
+          sendMove();
         });
+
+        $("#touchpad").on('touchstart', function(e) {
+          e.preventDefault();
+          var touch = e.touches[0];
+          bx=touch.pageX;
+          by=touch.pageY;
+        });
+        
+        $("#touchpad").on('touchmove', function(e) {
+          e.preventDefault();
+          var touch = e.touches[0];
+          ex=touch.pageX;
+          ey=touch.pageY;
+        });
+        
+        $("#touchpad").on('touchend', function(e) {
+          e.preventDefault();
+          sendMove();
+        });
+
+        function sendMove() {
+          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasControl ? 1 : 0, x: parseInt(ex - bx), y: parseInt(ey - by) }));
+        }
 
         $("#b1").click(function() {
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 1, x: 0, y: 0 }));
