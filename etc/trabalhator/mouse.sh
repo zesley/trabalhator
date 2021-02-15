@@ -35,7 +35,7 @@ run() {
       cin=0
     fi
 
-    move "$x" "$y" 0.25
+    move "$x" "$y" 1
 
     x=$(echo "obase=10; ibase=16; $(echo $x | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)
     y=$(echo "obase=10; ibase=16; $(echo $y | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)
