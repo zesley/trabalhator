@@ -47,7 +47,7 @@ run() {
       y=$(($y - 256))
     fi
 
-    te=`date +%s%N`
+    te=$(date +%s%N)
 
     echo '{ "exec": "'$((($te - $ts) / 1000000))'", "x": "'$x'", "y": "'$y'" }'
   done
