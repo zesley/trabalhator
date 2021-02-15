@@ -15,8 +15,8 @@ run() {
     ts=$(date +%s%N)
 
     # random
-    #x=`coord`
-    #y=`coord`
+    #x=$(coord)
+    #y=$(coord)
 
     # 1px square
     x="x00"
