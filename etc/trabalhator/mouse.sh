@@ -18,20 +18,20 @@ run() {
     #x=`coord`
     #y=`coord`
 
-    # 2px square
+    # 1px square
     x="x00"
     y="x00"
     if [ $cin == 0 ]; then
-      x="x03"
+      x="x01"
       cin=1
     elif [ $cin == 1 ]; then
-      y="x03"
+      y="x01"
       cin=2
     elif [ $cin == 2 ]; then
-      x="xfd"
+      x="xff"
       cin=3
     elif [ $cin == 3 ]; then
-      y="xfd"
+      y="xff"
       cin=0
     fi
 
