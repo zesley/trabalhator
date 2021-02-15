@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /sys/kernel/config/usb_gadget/
-mkdir -p isticktoit
-cd isticktoit
+mkdir -p my_usb
+cd my_usb
 echo "0x1d6b" > idVendor
 echo "0x0104" > idProduct
 echo "0x0100" > bcdDevice
