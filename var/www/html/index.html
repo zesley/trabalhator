@@ -110,9 +110,9 @@
           $("#composit-indicator").toggleClass("composity-off");
           $("#hold-indicator").toggleClass("composity-on");
           $("#hold-indicator").toggleClass("composity-off");
-          hasControl = !hasControl;
+          hasHold = !hasHold;
 
-          if (!hasControl && typed.length > 0) {
+          if (!hasHold && typed.length > 0) {
             callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
           }
@@ -124,22 +124,23 @@
           $("#composit-indicator").toggleClass("composity-off");
           $("#hold-indicator").toggleClass("composity-on");
           $("#hold-indicator").toggleClass("composity-off");
-          hasControl = !hasControl;
+          hasHold = !hasHold;
 
-          if (!hasControl && typed.length > 0) {
+          if (!hasHold && typed.length > 0) {
             callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
           }
         });
 
-        var hasControl = false;
+        var hasHold = false;
+        var hasShift = false;
 
         var typed = [];
 
         $(document).on('keyup keydown', function(e){
-          hasControl = e.ctrlKey;
+          hasHold = e.ctrlKey;
           
-          if (hasControl) {
+          if (hasHold) {
             $("#composit-indicator").addClass("composity-on");
             $("#composit-indicator").removeClass("composity-off");
             $("#hold-indicator").addClass("composity-on");
@@ -150,10 +151,11 @@
             $("#hold-indicator").removeClass("composity-on");
             $("#hold-indicator").addClass("composity-off");
           }
+          
 
-          if (!hasControl && typed.length > 0) {
-              callAjax('/cgi-bin/type?keys=' + typed);
-              typed = [];
+          if (!hasHold && typed.length > 0) {
+            callAjax('/cgi-bin/type?keys=' + typed);
+            typed = [];
           }
         });
 
@@ -166,10 +168,20 @@
 
           key = el.attr('data-key');
           
-          if (hasControl) {
+          if (hasHold) {
             typed.push(key);
+          } else if (hasShift) {
+            hasShift = false;
+            typed.push(key);
+            callAjax('/cgi-bin/type?keys=' + typed);
+            typed = [];
           } else {
+            if (key.includes("shift")) {
+              hasShift = true;
+              typed.push(key);
+            } else {
               callAjax('/cgi-bin/type?keys=' + key);
+            }
           }
         });
 
@@ -186,13 +198,7 @@
 
         $("#touchpad").on("mousemove", function(e) {
           e.preventDefault();
-          var cx = e.offsetX;
-          var cy = e.offsetY;
-          if (moving && (cx != bx || cy != by)) {
-            sendMove(cx - bx, cy - by);
-            bx=cx;
-            by=cy;
-          }
+          sendMove(e.offsetX, e.offsetY);
         });
 
         $("#touchpad").on("mouseup", function(e) {
@@ -209,13 +215,7 @@
         
         $("#touchpad").on('touchmove', function(e) {
           e.preventDefault();
-          var cx = e.touches[0].pageX;
-          var cy = e.touches[0].pageY;
-          if (moving && (cx != bx || cy != by)) {
-            sendMove(cx - bx, cy - by);
-            bx=cx;
-            by=cy;
-          }
+          sendMove(e.touches[0].pageX, e.touches[0].pageY);
         });
 
         $("#touchpad").on('touchend', function(e) {
@@ -224,7 +224,15 @@
         });
       
         function sendMove(x, y) {
-          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasControl ? 1 : 0, x: parseInt(x), y: parseInt(y) }));
+          if (moving) {
+            var mx = parseInt(x - bx);
+            var my = parseInt(y - by);
+            if ((mx != 0 && my != 0)) {
+              bx=x;
+              by=y;
+              callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasHold ? 1 : 0, x: mx, y: my }));
+            }
+          }
         }
 
         $("#b1").click(function(e) {
