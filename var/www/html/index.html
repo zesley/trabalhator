@@ -152,7 +152,6 @@
             $("#hold-indicator").addClass("composity-off");
           }
           
-
           if (!hasHold && typed.length > 0) {
             callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
@@ -171,10 +170,12 @@
           if (hasHold) {
             typed.push(key);
           } else if (hasShift) {
-            hasShift = false;
-            typed.push(key);
-            callAjax('/cgi-bin/type?keys=' + typed);
-            typed = [];
+            if (!key.includes("shift")) {
+              hasShift = false;
+              typed.push(key);
+              callAjax('/cgi-bin/type?keys=' + typed);
+              typed = [];
+            }
           } else {
             if (key.includes("shift")) {
               hasShift = true;

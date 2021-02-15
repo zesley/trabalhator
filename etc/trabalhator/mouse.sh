@@ -6,13 +6,13 @@ move() {
 }
 
 coord() {
-  echo `hexdump -n 1 -v -e '"\\x" "%02X"' /dev/urandom`
+  echo $(hexdump -n 1 -v -e '"\\x" "%02X"' /dev/urandom)
 }
 
 run() {
   cin=0
   while true; do
-    ts=`date +%s%N`
+    ts=$(date +%s%N)
 
     # random
     #x=`coord`
@@ -37,10 +37,9 @@ run() {
 
     move "$x" "$y" 0.25
 
-    x=`echo $x | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//'`
-    y=`echo $y | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//'`
-    x=`echo "obase=10; ibase=16; $x" | bc`
-    y=`echo "obase=10; ibase=16; $y" | bc`
+    x=$(echo "obase=10; ibase=16; $(echo $x | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)
+    y=$(echo "obase=10; ibase=16; $(echo $y | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)
+    
     if [ $x -ge 127 ]; then
       x=$(($x - 256))
     fi

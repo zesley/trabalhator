@@ -1,9 +1,9 @@
 #!/bin/bash
 
 run() {
-  ts=`date +%s%N`
+  ts=$(date +%s%N)
 
-  move=(`echo $1 | sed 's/coords=//' | sed 's/\%22//g' | sed 's/{//g' | sed 's/}//g' | sed 's/x//g' | sed 's/y//g' |  sed 's/://g' | sed 's/,/\n/g'`)
+  move=$(echo $1 | sed 's/coords=//' | sed 's/\%22//g' | sed 's/{//g' | sed 's/}//g' | sed 's/x//g' | sed 's/y//g' |  sed 's/://g' | sed 's/,/\n/g')
 
   b=${move[0]}
   if [ "$b" = "b1" ]; then
@@ -15,6 +15,7 @@ run() {
   else
     b="00"
   fi
+  
   x=${move[1]}
   if [ $x -ne 0 ]; then
     if [ $x -gt 0 ]; then
@@ -28,7 +29,8 @@ run() {
       x=$((256+$x))
     fi
   fi
-  x=`echo "obase=16; ibase=10; $x" | bc | sed 's/-//g' `
+  x=$(echo "obase=16; ibase=10; $x" | bc | sed 's/-//g')
+
   y=${move[2]}
   if [ $y -ne 0 ]; then
     if [ $y -gt 0 ]; then
@@ -42,7 +44,7 @@ run() {
       y=$((256+$y))
     fi
   fi
-  y=`echo "obase=16; ibase=10; $y" | bc | sed 's/-//g' `
+  y=$(echo "obase=16; ibase=10; $y" | bc | sed 's/-//g')
 
   echo -ne "\\x$b\\x$x\\x$y" > /dev/hidg1
 
@@ -50,7 +52,7 @@ run() {
     echo -ne "\\x00\\x00\\x00" > /dev/hidg1
   fi
 
-  te=`date +%s%N`
+  te=$(date +%s%N)
 
   echo '{ "exec": "'$((($te - $ts) / 1000000))'", "b": "'$b'", "x": "'$x'", "y": "'$y'" }'
 }

@@ -1,11 +1,11 @@
 #!/bin/bash
 echo 'Content-type: application/json'
-ks=`systemctl status keyboard.service | grep "Active:" | awk '{ print $2 }'`
-ms=`systemctl status mouse.service | grep "Active:" | awk '{ print $2 }'`
-keyboard=`tail -1 /usr/lib/cgi-bin/keyboard.log`
-mouse=`tail -1 /usr/lib/cgi-bin/mouse.log`
-type=`tail -1 /usr/lib/cgi-bin/type.log`
-move=`tail -1 /usr/lib/cgi-bin/move.log`
+ks=$(systemctl status keyboard.service | grep "Active:" | awk '{ print $2 }')
+ms=$(systemctl status mouse.service | grep "Active:" | awk '{ print $2 }')
+keyboard=$(tail -1 /usr/lib/cgi-bin/keyboard.log)
+mouse=$(tail -1 /usr/lib/cgi-bin/mouse.log)
+type=$(tail -1 /usr/lib/cgi-bin/type.log)
+move=$(tail -1 /usr/lib/cgi-bin/move.log)
 echo ''
 echo '{'
 if [ "$keyboard" != "" ]; then

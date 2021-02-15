@@ -1,12 +1,11 @@
 #!/bin/bash
 
-
 run() {
-  ts=`date +%s%N`
-  keys=`echo $1 | sed 's/keys=//' | sed 's/\,/ /g' `
+  ts=$(date +%s%N)
+  keys=$(echo $1 | sed 's/keys=//' | sed 's/\,/ /g')
   echo $keys | /etc/trabalhator/hid_gadget_test /dev/hidg0 > /dev/null 2>&1
   sleep 0.005
-  te=`date +%s%N`
+  te=$(date +%s%N)
   echo '{ "exec": "'$((($te - $ts) / 1000000))'", "keys": "'$keys'" }'
 }
 

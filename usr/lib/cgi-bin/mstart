@@ -1,5 +1,5 @@
 #!/bin/bash
-ms=`systemctl status mouse.service | grep "Active:" | awk '{ print $2 } '`
+ms=$(systemctl status mouse.service | grep "Active:" | awk '{ print $2 } ')
 if [ "$ms" != "active" ]; then
   sudo /etc/trabalhator/start_mouse.sh > /dev/null 2>&1 &
 fi
