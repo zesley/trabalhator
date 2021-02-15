@@ -2,9 +2,9 @@
 Description=Keyboard Daemon
 
 [Service]
-ExecStart=/bin/bash -c '/home/wesley/usb-otg/keyboard.sh start'
+ExecStart=/bin/bash -c '/etc/trabalhator/keyboard.sh start'
 ExecStop=/bin/kill -9 $MAINPID
-ExecStop=/bin/bash -c '/home/wesley/usb-otg/keyboard.sh stop'
+ExecStop=/bin/bash -c '/etc/trabalhator/keyboard.sh stop'
 Restart=no
 User=root
 

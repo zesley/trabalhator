@@ -3,7 +3,7 @@
 run() {
   ts=$(date +%s%N)
 
-  move=$(echo $1 | sed 's/coords=//' | sed 's/\%22//g' | sed 's/{//g' | sed 's/}//g' | sed 's/x//g' | sed 's/y//g' |  sed 's/://g' | sed 's/,/\n/g')
+  move=($(echo $1 | sed 's/coords=//' | sed 's/\%22//g' | sed 's/{//g' | sed 's/}//g' | sed 's/x//g' | sed 's/y//g' |  sed 's/://g' | sed 's/,/\n/g'))
 
   b=${move[0]}
   if [ "$b" = "b1" ]; then
