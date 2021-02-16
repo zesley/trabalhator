@@ -137,7 +137,6 @@ int keyboard_fill_report(char report[8], char buf[BUF_LEN], int *hold)
 	int i = 0;
 
 	for (; tok != NULL; tok = strtok(NULL, " ")) {
-
 		if (strcmp(tok, "--quit") == 0) {
 			return -1;
 		}
@@ -147,15 +146,17 @@ int keyboard_fill_report(char report[8], char buf[BUF_LEN], int *hold)
 			continue;
 		}
 
-		for (i = 0; kval[i].opt != NULL; i++) {
-			if (strcmp(tok, kval[i].opt) == 0) {
-				report[2 + key++] = kval[i].val;
-				break;
+		if (key < 6) {
+			for (i = 0; kval[i].opt != NULL; i++) {
+				if (strcmp(tok, kval[i].opt) == 0) {
+					report[2 + key++] = kval[i].val;
+					break;
+				}
 			}
-		}
 
-		if (kval[i].opt != NULL) {
-			continue;
+			if (kval[i].opt != NULL) {
+				continue;
+			}
 		}
 
 		for (i = 0; kmod[i].opt != NULL; i++) {
@@ -168,14 +169,19 @@ int keyboard_fill_report(char report[8], char buf[BUF_LEN], int *hold)
 		if (kmod[i].opt != NULL) {
 			continue;
 		}
+
+		if (key < 6) {
+			fprintf(stderr, "Unknow Value: %s\n", tok);
+		}
 	}
-	return 8;
+	
+	return key;
 }
 
 void print_options()
 {
 	int i = 0;
-	printf("Options:\n\t--hold\n");
+	printf("Options:\n\t--hold\n\t--quit\n");
 	for (i = 0; kmod[i].opt != NULL; i++)
 		printf("\t%s\n", kmod[i].opt);
 	printf("\nValues:\n");
@@ -210,15 +216,16 @@ int main(int argc, const char *argv[])
 
 	print_options();
 
-	while (42) {
-
+	while (1) {
 		FD_ZERO(&rfds);
 		FD_SET(STDIN_FILENO, &rfds);
 		FD_SET(fd, &rfds);
 
 		retval = select(fd + 1, &rfds, NULL, NULL, NULL);
-		if (retval == -1 && errno == EINTR)
+		if (retval == -1 && errno == EINTR) {
 			continue;
+		}
+
 		if (retval < 0) {
 			perror("select()");
 			return 4;
@@ -226,18 +233,22 @@ int main(int argc, const char *argv[])
 
 		if (FD_ISSET(fd, &rfds)) {
 			cmd_len = read(fd, buf, BUF_LEN - 1);
-			printf("recv report:");
-			for (i = 0; i < cmd_len; i++)
-				printf(" %02x", buf[i]);
-			printf("\n");
+			printf("{ \"report\": \"");
+			for (i = 0; i < cmd_len; i++) {
+			  if (buf[i] != 0) { 
+					printf("%02x", buf[i]);
+				}
+			}
+			printf("\"} \n");
 		}
 
 		if (FD_ISSET(STDIN_FILENO, &rfds)) {
 			memset(report, 0x0, sizeof(report));
 			cmd_len = read(STDIN_FILENO, buf, BUF_LEN - 1);
 
-			if (cmd_len == 0)
+			if (cmd_len == 0) {
 				break;
+			}
 
 			buf[cmd_len - 1] = '\0';
 			hold = 0;
@@ -246,18 +257,22 @@ int main(int argc, const char *argv[])
 
 			to_send = keyboard_fill_report(report, buf, &hold);
 
-			if (to_send == -1)
+			if (to_send == -1) {
 				break;
-
-			if (write(fd, report, to_send) != to_send) {
-				perror(filename);
-				return 5;
 			}
-			if (!hold) {
-				memset(report, 0x0, sizeof(report));
-				if (write(fd, report, to_send) != to_send) {
+
+			if (to_send > 0) {
+				if (write(fd, report, 8) != 8) {
 					perror(filename);
-					return 6;
+					return 5;
+				}
+				
+				if (!hold) {
+					memset(report, 0x0, sizeof(report));
+					if (write(fd, report, 8) != 8) {
+						perror(filename);
+						return 6;
+					}
 				}
 			}
 		}
