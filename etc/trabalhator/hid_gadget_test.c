@@ -125,6 +125,8 @@ static struct options kval[] = {
 	{.opt = "--kp-9",        			.val = 0x61}, 	// Keypad 9 -> Page Up
 	{.opt = "--kp-0",        			.val = 0x62}, 	// Keypad 0 -> Insert
 	{.opt = "--kp-dot",          	.val = 0x63}, 	// Keypad . -> Delete
+	{.opt = "--kp-nonus",         .val = 0x64}, 	// Keyboard Non-US \ and |
+	{.opt = "--kp-compose",       .val = 0x65}, 	// Keyboard Application
 	{.opt = NULL}
 };
 

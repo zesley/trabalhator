@@ -350,6 +350,10 @@
         border: 1px solid #444;
         box-shadow: 0 0.2em 0 0.05em #222;
         border-bottom-color: #555;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
       .keyboard__row--h1 > div {
@@ -365,27 +369,32 @@
       }
 
       .key--w3 {
-        width: 3.5em;
+        width: 3.5em !important;
       }
 
       .key--w4 {
-        width: 4.6em;
+        width: 4.6em !important;
       }
 
       .key--w5 {
-        width: 5.5em;
+        width: 5.5em !important;
       }
 
       .key--w6 {
-        width: 7.3em;
+        width: 6.4em !important;
+      }
+
+      .key--w7 {
+        width: 7.3em !important;
       }
 
       .key--space {
-        width: 24.4em;
+        width: 24.4em !important;
       }
 
       .key--double > * {
         padding-top: 0.1em;
+        font-size: 11px;
       }
 
       .key--letter {
@@ -404,15 +413,6 @@
         text-align: right;
         bottom: 0.4em;
         right: 0.4em;
-      }
-
-      .key--fn > * {
-        font-size: 0.6em;
-        line-height: 1em;
-        padding-top: 1.2em;
-        padding-right: 0.2em;
-        text-align: right;
-        float: right;
       }
 
       .key--word > * {
@@ -450,7 +450,7 @@
         border: none !important;
         background: none !important;
         box-shadow: none !important;
-        width: 2.8em !important;
+        width: 3em !important;
       }
 
       .square {
@@ -461,8 +461,10 @@
         margin-bottom: 1px;
       }
 
-      .option {
-        font-size: 13px;
+      .box {
+        width: 5px;
+        height: 5px;
+        border: 1px solid white;
       }
 
       .hiden {
@@ -587,54 +589,61 @@
             <span>Esc</span>
             </div>
             <div class="key-space"></div>
-            <div data-key="--f1" class="key--fn key">
+            <div data-key="--f1" class="key--word key">
             <span>F1</span>
             </div>
-            <div data-key="--f2" class="key--fn key">
+            <div data-key="--f2" class="key--word key">
             <span>F2</span>
             </div>
-            <div data-key="--f3" class="key--fn key">
+            <div data-key="--f3" class="key--word key">
             <span>F3</span>
             </div>
-            <div data-key="--f4" class="key--fn key">
+            <div data-key="--f4" class="key--word key">
             <span>F4</span>
             </div>
             <div class="small-space"></div>
-            <div data-key="--f5" class="key--fn key">
+            <div data-key="--f5" class="key--word key">
             <span>F5</span>
             </div>
-            <div data-key="--f6" class="key--fn key">
+            <div data-key="--f6" class="key--word key">
             <span>F6</span>
             </div>
-            <div data-key="--f7" class="key--fn key">
+            <div data-key="--f7" class="key--word key">
             <span>F7</span>
             </div>
-            <div data-key="--f8" class="key--fn key">
+            <div data-key="--f8" class="key--word key">
             <span>F8</span>
             </div>
             <div class="small-space"></div>
-            <div data-key="--f9" class="key--fn key">
+            <div data-key="--f9" class="key--word key">
             <span>F9</span>
             </div>
-            <div data-key="--f10" class="key--fn key">
+            <div data-key="--f10" class="key--word key">
             <span>F10</span>
             </div>
-            <div data-key="--f11" class="key--fn key">
+            <div data-key="--f11" class="key--word key">
             <span>F11</span>
             </div>
-            <div data-key="--f12" class="key--fn key">
+            <div data-key="--f12" class="key--word key">
             <span>F12</span>
             </div>
             <div class="small-space"></div>
-            <div class="key--fn option" id="composity">
+            <div data-key="--prtscr" class="key--double key">
+                <span>PrtSc</span>
+            </div>
+            <div data-key="--scrlock" class="key--double key">
+              <span>ScrLk</span>
+            </div>
+            <div data-key="--pause" class="key--double key">
+              <span>Pause</span>
+            </div>
+            <div class="small-space"></div>
+            <div class="key-space"></div>
+            <div class="key-space"></div>
+            <div class="key-space"></div>
+            <div class="key--double" id="composity">
               <span>Comp</span>
               <div class="avua composity-off" id="composit-indicator"></div>
-            </div>
-            <div data-key="--num-lock" class="key--fn key option">
-                <span>NumLk</span>
-            </div>
-            <div data-key="---kp-enter" class="key--fn key option">
-                <span>Kp</span>
             </div>
         </div>
         <div class="keyboard__row">
@@ -642,43 +651,43 @@
             <div>~</div>
             <div>`</div>
             </div>
-            <div class="key--double key" data-key="--num-1">
+            <div class="key--double key" data-key="--1">
             <div>!</div>
             <div>1</div>
             </div>
-            <div class="key--double key" data-key="--num-2">
+            <div class="key--double key" data-key="--2">
             <div>@</div>
             <div>2</div>
             </div>
-            <div class="key--double key" data-key="--num-3">
+            <div class="key--double key" data-key="--3">
             <div>#</div>
             <div>3</div>
             </div>
-            <div class="key--double key" data-key="--num-4">
+            <div class="key--double key" data-key="--4">
             <div>$</div>
             <div>4</div>
             </div>
-            <div class="key--double key" data-key="--num-5">
+            <div class="key--double key" data-key="--5">
             <div>%</div>
             <div>5</div>
             </div>
-            <div class="key--double key" data-key="--num-6">
+            <div class="key--double key" data-key="--6">
             <div>^</div>
             <div>6</div>
             </div>
-            <div class="key--double key" data-key="--num-7">
+            <div class="key--double key" data-key="--7">
             <div>&</div>
             <div>7</div>
             </div>
-            <div class="key--double key" data-key="--num-8">
+            <div class="key--double key" data-key="--8">
             <div>*</div>
             <div>8</div>
             </div>
-            <div class="key--double key" data-key="--num-9">
+            <div class="key--double key" data-key="--9">
             <div>(</div>
             <div>9</div>
             </div>
-            <div class="key--double key" data-key="--num-0">
+            <div class="key--double key" data-key="--0">
             <div>)</div>
             <div>0</div>
             </div>
@@ -694,35 +703,48 @@
             <span>&larrfs;</span>
             </div>
             <div class="small-space"></div>
-            <div class="key--letter key option" data-key="--insert">
-            <span>Insert</span>
+            <div class="key--double key" data-key="--insert">
+            <span>Ins</span>
             </div>
-            <div class="key--letter key option" data-key="--home">
+            <div class="key--double key" data-key="--home">
             <span>Home</span>
             </div>
-            <div class="key--letter key option" data-key="--pageup">
+            <div class="key--double key" data-key="--pageup">
             <span>PgUp</span>
+            </div>
+            <div class="small-space"></div>
+            <div class="key--double key" data-key="--numlock">
+              <span>NumLk</span>
+            </div>
+            <div class="key--letter key" data-key="--kp-slash">
+              <span>/</span>
+            </div>
+            <div class="key--letter key" data-key="--kp-star">
+              <span>*</span>
+            </div>
+            <div class="key--letter key" data-key="--kp-minus">
+              <span>-</span>
             </div>
         </div>
         <div class="keyboard__row">
             <div class="key--bottom-left key--word key--w4 key" data-key="--tab">
             <span>Tab</span>
             </div>
-            <div class="key--letter key" data-key="q">Q</div>
-            <div class="key--letter key" data-key="w">W</div>
-            <div class="key--letter key" data-key="e">E</div>
-            <div class="key--letter key" data-key="r">R</div>
-            <div class="key--letter key" data-key="t">T</div>
-            <div class="key--letter key" data-key="y">Y</div>
-            <div class="key--letter key" data-key="u">U</div>
-            <div class="key--letter key" data-key="i">I</div>
-            <div class="key--letter key" data-key="o">O</div>
-            <div class="key--letter key" data-key="p">P</div>
-            <div class="key--double key" data-key="--open-bracket">
+            <div class="key--letter key" data-key="--q">Q</div>
+            <div class="key--letter key" data-key="--w">W</div>
+            <div class="key--letter key" data-key="--e">E</div>
+            <div class="key--letter key" data-key="--r">R</div>
+            <div class="key--letter key" data-key="--t">T</div>
+            <div class="key--letter key" data-key="--y">Y</div>
+            <div class="key--letter key" data-key="--u">U</div>
+            <div class="key--letter key" data-key="--i">I</div>
+            <div class="key--letter key" data-key="--o">O</div>
+            <div class="key--letter key" data-key="--p">P</div>
+            <div class="key--double key" data-key="--openbracket">
             <div>{</div>
             <div>[</div>
             </div>
-            <div class="key--double key" data-key="--close-bracket">
+            <div class="key--double key" data-key="--closebracket">
             <div>}</div>
             <div>]</div>
             </div>
@@ -731,29 +753,45 @@
             <div>\</div>
             </div>
             <div class="small-space"></div>
-            <div class="key--letter key option" data-key="--del">
+            <div class="key--double key" data-key="--del">
             <span>Del</span>
             </div>
-            <div class="key--letter key option" data-key="--end">
+            <div class="key--double key" data-key="--end">
             <span>End</span>
             </div>
-            <div class="key--letter key option" data-key="--pagedown">
+            <div class="key--double key" data-key="--pagedown">
             <span>PgDn</span>
+            </div>
+            <div class="small-space"></div>
+            <div class="key--double key" data-key="--kp-7">
+            <div>7</div>
+            <div>Home</div>
+            </div>
+            <div class="key--double key" data-key="--kp-8">
+            <div>8</div>
+            <div>Up</div>
+            </div>
+            <div class="key--double key" data-key="--kp-9">
+            <div>9</div>
+            <div>PgUp</div>
+            </div>
+            <div class="key--letter key" data-key="--kp-plus" style="height: 90px;">
+              <span>+</span>
             </div>
         </div>
         <div class="keyboard__row">
             <div class="key--bottom-left key--word key--w5 key" data-key="--caps-lock">
             <span>CapsLk</span>
             </div>
-            <div class="key--letter key" data-key="a">A</div>
-            <div class="key--letter key" data-key="s">S</div>
-            <div class="key--letter key" data-key="d">D</div>
-            <div class="key--letter key" data-key="f">F</div>
-            <div class="key--letter key" data-key="g">G</div>
-            <div class="key--letter key" data-key="h">H</div>
-            <div class="key--letter key" data-key="j">J</div>
-            <div class="key--letter key" data-key="k">K</div>
-            <div class="key--letter key" data-key="l">L</div>
+            <div class="key--letter key" data-key="--a">A</div>
+            <div class="key--letter key" data-key="--s">S</div>
+            <div class="key--letter key" data-key="--d">D</div>
+            <div class="key--letter key" data-key="--f">F</div>
+            <div class="key--letter key" data-key="--g">G</div>
+            <div class="key--letter key" data-key="--h">H</div>
+            <div class="key--letter key" data-key="--j">J</div>
+            <div class="key--letter key" data-key="--k">K</div>
+            <div class="key--letter key" data-key="--l">L</div>
             <div class="key--double key" data-key="--semicolon">
             <div>:</div>
             <div>;</div>
@@ -769,18 +807,31 @@
             <div class="key-space"></div>
             <div class="key-space"></div>
             <div class="key-space"></div>
+            <div class="small-space"></div>
+            <div class="key--double key" data-key="--kp-4">
+            <div>4</div>
+            <div>Left</div>
+            </div>
+            <div class="key--letter key" data-key="--kp-5">
+              <span>5</span>
+            </div>
+            <div class="key--double key" data-key="--kp-6">
+            <div>6</div>
+            <div>Right</div>
+            </div>
+            <div class="key-space"></div>
         </div>
         <div class="keyboard__row">
-            <div class="key--bottom-left key--word key--w6 key" data-key="--left-shift">
+            <div class="key--bottom-left key--word key--w7 key" data-key="--left-shift">
             <span>Shift</span>
             </div>
-            <div class="key--letter key" data-key="z">Z</div>
-            <div class="key--letter key" data-key="x">X</div>
-            <div class="key--letter key" data-key="c">C</div>
-            <div class="key--letter key" data-key="v">V</div>
-            <div class="key--letter key" data-key="b">B</div>
-            <div class="key--letter key" data-key="n">N</div>
-            <div class="key--letter key" data-key="m">M</div>
+            <div class="key--letter key" data-key="--z">Z</div>
+            <div class="key--letter key" data-key="--x">X</div>
+            <div class="key--letter key" data-key="--c">C</div>
+            <div class="key--letter key" data-key="--v">V</div>
+            <div class="key--letter key" data-key="--b">B</div>
+            <div class="key--letter key" data-key="--n">N</div>
+            <div class="key--letter key" data-key="--m">M</div>
             <div class="key--double key" data-key="--comma">
             <div>&lt;</div>
             <div>,</div>
@@ -793,13 +844,27 @@
             <div>?</div>
             <div>/</div>
             </div>
-            <div class="key--bottom-right key--word key--w6 key" data-key="--right-shift">
+            <div class="key--bottom-right key--word key--w7 key" data-key="--right-shift">
             <span>Shift</span>
             </div>
             <div class="small-space"></div>
             <div class="key-space"></div>
-            <div class="key--letter key option" data-key="--up">
+            <div class="key--letter key" data-key="--up">
                 <span>&uarr;</span>
+            </div>
+            <div class="key-space"></div>
+            <div class="small-space"></div>
+            <div class="key--double key" data-key="--kp-1">
+            <div>1</div>
+            <div>End</div>
+            </div>
+            <div class="key--double key" data-key="--kp-2">
+            <div>2</div>
+            <div>Down</div>
+            </div>
+            <div class="key--double key" data-key="--kp-3">
+            <div>3</div>
+            <div>PgDn</div>
             </div>
             <div class="key-space"></div>
         </div>
@@ -828,30 +893,34 @@
             <div class="key--bottom-left key--word key--w3 key" data-key="--right-alt">
             <span>Alt</span>
             </div>
-            <div class="key--bottom-left key--word key--w1 key" data-key="--right-meta">
-              <div>
-                <div style="display: flex;">
-                    <div class="square">&nbsp;</div>
-                    <div class="square">&nbsp;</div>
-                </div>
-                <div style="display: flex;">
-                    <div class="square">&nbsp;</div>
-                    <div class="square">&nbsp;</div>
-                </div>
-            </div>
+            <div class="key--bottom-left key--word key--w1 key" data-key="--kp-compose">
+              <div class="box">&nbsp;</div>
             </div>
         <div class="key--bottom-left key--word key--w4 key" data-key="--right-ctrl">
             <span>Ctrl</span>
             </div>
             <div class="small-space"></div>
-            <div class="key--letter key option" data-key="--left">
+            <div class="key--letter key" data-key="--left">
                 <span>&larr;</span>
             </div>
-            <div class="key--letter key option" data-key="--down">
+            <div class="key--letter key" data-key="--down">
                 <span>&darr;</span>
             </div>
-            <div class="key--letter key option" data-key="--right">
+            <div class="key--letter key" data-key="--right">
                 <span>&rarr;</span>
+            </div>
+
+            <div class="small-space"></div>
+            <div class="key--double key--w6 key" data-key="--kp-0">
+            <div>0</div>
+            <div>Ins</div>
+            </div>
+            <div class="key--double key" data-key="--kp-dot">
+            <div>.</div>
+            <div>Del</div>
+            </div>
+            <div class="key--double key" data-key="--kp-return" style="height: 90px; margin-top: -44px !important;">
+              <span>Return</span>
             </div>
         </div>
       </div>
