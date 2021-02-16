@@ -9,12 +9,12 @@ typelong() {
   text=$1
   for i in $(seq 1 ${#text})
   do
-    type "${text:i-1:1}" $2
+    type "--${text:i-1:1}" $2
   done
 }
 
 open() {
-  type "--right-meta r" 1
+  type "--right-meta --r" 1
   typelong "notepad" 0.05
   type "--return" 2
 }
@@ -38,7 +38,7 @@ run() {
 }
 
 close() {
-  type "--left-ctrl a" 0.5
+  type "--left-ctrl --a" 0.5
   type "--del" 0.5
   type "--left-alt --f4" 0.5
 }
