@@ -22,7 +22,7 @@ static struct options kmod[] = {
 	{.opt = "--right-ctrl",				.val = 0x10},
 	{.opt = "--left-shift",				.val = 0x02},
 	{.opt = "--right-shift",			.val = 0x20},
-	{.opt = "--left-alt",					.val = 0x04},
+	{.opt = "--left-alt",				.val = 0x04},
 	{.opt = "--right-alt",				.val = 0x40},
 	{.opt = "--left-meta",				.val = 0x08},
 	{.opt = "--right-meta",				.val = 0x80},
@@ -66,67 +66,67 @@ static struct options kval[] = {
 	{.opt = "--8",          			.val = 0x25},   // 8 -> *
 	{.opt = "--9",          			.val = 0x26},   // 9 -> (
 	{.opt = "--0",          			.val = 0x27},   // 0 -> )
-	{.opt = "--return",         	.val = 0x28},   // Return
-	{.opt = "--esc",            	.val = 0x29},   // Escape
-	{.opt = "--bckspc",         	.val = 0x2a},   // Backspace
-	{.opt = "--tab",            	.val = 0x2b},   // Tab
-	{.opt = "--spacebar",       	.val = 0x2c},   // Spacebar
-	{.opt = "--dash",           	.val = 0x2d},   // - -> _
-	{.opt = "--equal",          	.val = 0x2e},   // = -> +
-	{.opt = "--openbracket",   		.val = 0x2f},   // [ -> {
-	{.opt = "--closebracket",  		.val = 0x30},   // ] -> }
-	{.opt = "--backslach",      	.val = 0x31},   // \ -> |
-	{.opt = "--semicolon",      	.val = 0x33},   // ; -> :
-	{.opt = "--quote",          	.val = 0x34},   // ' -> "
-	{.opt = "--grave",          	.val = 0x35},   // ` -> ~
-	{.opt = "--comma",          	.val = 0x36},   // , -> <
-	{.opt = "--dot",            	.val = 0x37},   // . -> >
-	{.opt = "--slash",          	.val = 0x38},   // / -> ?
-	{.opt = "--capslock",      		.val = 0x39},   // Caps Lock
-	{.opt = "--f1",             	.val = 0x3a},   // F1
-	{.opt = "--f2",             	.val = 0x3b},   // F2
-	{.opt = "--f3",             	.val = 0x3c},   // F3
-	{.opt = "--f4",             	.val = 0x3d},   // F4
-	{.opt = "--f5",             	.val = 0x3e},   // F5
-	{.opt = "--f6",             	.val = 0x3f},   // F6
-	{.opt = "--f7",             	.val = 0x40},   // F7
-	{.opt = "--f8",             	.val = 0x41},   // F8
-	{.opt = "--f9",             	.val = 0x42},   // F9
-	{.opt = "--f10",            	.val = 0x43},   // F10
-	{.opt = "--f11",            	.val = 0x44},   // F11
-	{.opt = "--f12",            	.val = 0x45},   // F12
-	{.opt = "--prtscr",          	.val = 0x46},  	// Print Screen
-	{.opt = "--scrlock",         	.val = 0x47},  	// Scroll Lock
-	{.opt = "--pause",           	.val = 0x48},  	// Pause
-	{.opt = "--insert",         	.val = 0x49},   // Insert
-	{.opt = "--home",           	.val = 0x4a},   // Home
-	{.opt = "--pageup",         	.val = 0x4b},  	// Page Up
-	{.opt = "--del",            	.val = 0x4c},   // Delete
-	{.opt = "--end",            	.val = 0x4d},   // End
-	{.opt = "--pagedown",       	.val = 0x4e},  	// Page Down
-	{.opt = "--right",          	.val = 0x4f},   // Right
-	{.opt = "--left",           	.val = 0x50},   // Left
-	{.opt = "--down",           	.val = 0x51},   // Down
-	{.opt = "--up",             	.val = 0x52},   // Up
-	{.opt = "--numlock",       		.val = 0x53},   // Num Lock
-	{.opt = "--kp-slash",        	.val = 0x54},  	// Keypad /
-	{.opt = "--kp-star",         	.val = 0x55},  	// Keypad *
-	{.opt = "--kp-minus",        	.val = 0x56},  	// Keypad -
-	{.opt = "--kp-plus",         	.val = 0x57},  	// Keypad +
-	{.opt = "--kp-return",       	.val = 0x58},  	// Keypad Return
-	{.opt = "--kp-1",        			.val = 0x59},		// Keypad 1 -> End
+	{.opt = "--return",         		.val = 0x28},   // Return
+	{.opt = "--esc",            		.val = 0x29},   // Escape
+	{.opt = "--bckspc",         		.val = 0x2a},   // Backspace
+	{.opt = "--tab",            		.val = 0x2b},   // Tab
+	{.opt = "--spacebar",       		.val = 0x2c},   // Spacebar
+	{.opt = "--dash",           		.val = 0x2d},   // - -> _
+	{.opt = "--equal",          		.val = 0x2e},   // = -> +
+	{.opt = "--openbracket",   			.val = 0x2f},   // [ -> {
+	{.opt = "--closebracket",  			.val = 0x30},   // ] -> }
+	{.opt = "--backslach",      		.val = 0x31},   // \ -> |
+	{.opt = "--semicolon",      		.val = 0x33},   // ; -> :
+	{.opt = "--quote",          		.val = 0x34},   // ' -> "
+	{.opt = "--grave",          		.val = 0x35},   // ` -> ~
+	{.opt = "--comma",          		.val = 0x36},   // , -> <
+	{.opt = "--dot",            		.val = 0x37},   // . -> >
+	{.opt = "--slash",          		.val = 0x38},   // / -> ?
+	{.opt = "--capslock",      			.val = 0x39},   // Caps Lock
+	{.opt = "--f1",             		.val = 0x3a},   // F1
+	{.opt = "--f2",             		.val = 0x3b},   // F2
+	{.opt = "--f3",             		.val = 0x3c},   // F3
+	{.opt = "--f4",             		.val = 0x3d},   // F4
+	{.opt = "--f5",             		.val = 0x3e},   // F5
+	{.opt = "--f6",             		.val = 0x3f},   // F6
+	{.opt = "--f7",             		.val = 0x40},   // F7
+	{.opt = "--f8",             		.val = 0x41},   // F8
+	{.opt = "--f9",             		.val = 0x42},   // F9
+	{.opt = "--f10",            		.val = 0x43},   // F10
+	{.opt = "--f11",            		.val = 0x44},   // F11
+	{.opt = "--f12",            		.val = 0x45},   // F12
+	{.opt = "--prtscr",          		.val = 0x46},  	// Print Screen
+	{.opt = "--scrlock",         		.val = 0x47},  	// Scroll Lock
+	{.opt = "--pause",           		.val = 0x48},  	// Pause
+	{.opt = "--insert",         		.val = 0x49},   // Insert
+	{.opt = "--home",           		.val = 0x4a},   // Home
+	{.opt = "--pageup",         		.val = 0x4b},  	// Page Up
+	{.opt = "--del",            		.val = 0x4c},   // Delete
+	{.opt = "--end",            		.val = 0x4d},   // End
+	{.opt = "--pagedown",       		.val = 0x4e},  	// Page Down
+	{.opt = "--right",          		.val = 0x4f},   // Right
+	{.opt = "--left",           		.val = 0x50},   // Left
+	{.opt = "--down",           		.val = 0x51},   // Down
+	{.opt = "--up",             		.val = 0x52},   // Up
+	{.opt = "--numlock",       			.val = 0x53},   // Num Lock
+	{.opt = "--kp-slash",        		.val = 0x54},  	// Keypad /
+	{.opt = "--kp-star",         		.val = 0x55},  	// Keypad *
+	{.opt = "--kp-minus",        		.val = 0x56},  	// Keypad -
+	{.opt = "--kp-plus",         		.val = 0x57},  	// Keypad +
+	{.opt = "--kp-return",       		.val = 0x58},  	// Keypad Return
+	{.opt = "--kp-1",        			.val = 0x59},	// Keypad 1 -> End
 	{.opt = "--kp-2",        			.val = 0x5a}, 	// Keypad 2 -> Down Arrow
-	{.opt = "--kp-3",        			.val = 0x5b},		// Keypad 3 -> PageDn
-	{.opt = "--kp-4",        			.val = 0x5c},		// Keypad 4 -> Left Arrow
+	{.opt = "--kp-3",        			.val = 0x5b},	// Keypad 3 -> PageDn
+	{.opt = "--kp-4",        			.val = 0x5c},	// Keypad 4 -> Left Arrow
 	{.opt = "--kp-5",        			.val = 0x5d}, 	// Keypad 5
 	{.opt = "--kp-6",        			.val = 0x5e}, 	// Keypad 6 -> Right Arrow
 	{.opt = "--kp-7",        			.val = 0x5f}, 	// Keypad 7 -> Home
 	{.opt = "--kp-8",        			.val = 0x60}, 	// Keypad 8 -> Up Arrow
 	{.opt = "--kp-9",        			.val = 0x61}, 	// Keypad 9 -> Page Up
 	{.opt = "--kp-0",        			.val = 0x62}, 	// Keypad 0 -> Insert
-	{.opt = "--kp-dot",          	.val = 0x63}, 	// Keypad . -> Delete
-	{.opt = "--alt-backslach",    .val = 0x64}, 	// Non-US \ -> |
-	{.opt = "--app",      			  .val = 0x65}, 	// Application
+	{.opt = "--kp-dot",          		.val = 0x63}, 	// Keypad . -> Delete
+	{.opt = "--alt-backslach",    		.val = 0x64}, 	// Non-US \ -> |
+	{.opt = "--app",      			  	.val = 0x65}, 	// Application
 	{.opt = NULL}
 };
 
@@ -201,6 +201,9 @@ int main(int argc, const char *argv[])
 	int hold = 0;
 	fd_set rfds;
 	int retval, i;
+	struct timeval *tv;
+	tv->tv_sec = 0;
+	tv->tv_usec = 500000;
 
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s devname\n", argv[0]);
@@ -221,7 +224,7 @@ int main(int argc, const char *argv[])
 		FD_SET(STDIN_FILENO, &rfds);
 		FD_SET(fd, &rfds);
 
-		retval = select(fd + 1, &rfds, NULL, NULL, NULL);
+		retval = select(fd + 1, &rfds, NULL, NULL, tv);
 		if (retval == -1 && errno == EINTR) {
 			continue;
 		}
@@ -233,13 +236,15 @@ int main(int argc, const char *argv[])
 
 		if (FD_ISSET(fd, &rfds)) {
 			cmd_len = read(fd, buf, BUF_LEN - 1);
-			printf("{ \"report\": \"");
-			for (i = 0; i < cmd_len; i++) {
-			  if (buf[i] != 0) { 
-					printf("%02x", buf[i]);
+			if (cmd_len > 0) {
+				printf("{ \"report\": \"");
+				for (i = 0; i < cmd_len; i++) {
+				if (buf[i] != 0 && buf[0] != '\0') { 
+						printf("%02x", buf[i]);
+					}
 				}
+				printf("\" } \n");
 			}
-			printf("\"} \n");
 		}
 
 		if (FD_ISSET(STDIN_FILENO, &rfds)) {
