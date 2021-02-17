@@ -187,8 +187,8 @@ int main(int argc, const char *argv[])
 	int retval, i, j;
 	struct timeval *tv;
 	tv->tv_sec = 0;
-	tv->tv_usec = 500000;
-	unsigned int usecs = 500000;
+	tv->tv_usec = 10000;
+	unsigned int usecs = 10000;
 
 	if (argc < 3) {
 		return 1;
@@ -248,11 +248,9 @@ int main(int argc, const char *argv[])
 
 	if (FD_ISSET(fd, &rfds)) {
 		cmd_len = read(fd, buf, BUF_LEN - 1);
-		printf("{ \"report\": \"");
 		for (i = 0; i < cmd_len; i++) {
 			printf("%02x", buf[i]);
 		}
-		printf("\" }\n");
 	}
 
 	close(fd);

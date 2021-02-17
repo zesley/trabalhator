@@ -1,22 +1,21 @@
 #!/bin/bash
 
 type() {
-  echo $1 | /etc/trabalhator/hid_gadget_test /dev/hidg0 2>&1
-  sleep $2
+  /etc/trabalhator/keyboard_control /dev/hidg0 $1
 }
 
 typelong() {
   text=$1
   for i in $(seq 1 ${#text})
   do
-    type "--${text:i-1:1}" $2
+    type "--${text:i-1:1}"
   done
 }
 
 open() {
   type "--right-meta --r" 1
-  typelong "notepad" 0.05
-  type "--return" 2
+  typelong "notepad"
+  type "--return" 1
 }
 
 run() {
@@ -26,10 +25,10 @@ run() {
     size=$(tr -dc '0-9' < /dev/urandom | head -n 1 | head --bytes 2 ; echo '')
     if [ "$size" != "00" ]; then
       text=$(tr -dc 'a-z' < /dev/urandom | head -c $size ; echo '')
-      typelong $text 0.005
+      typelong $text
       for i in $(seq 1 1 $size)
       do
-        type "--bckspc" 0.005
+        type "--bckspc"
       done
       te=$(date +%s%N)
       echo '{ "size": "'$size'", "exec": "'$((($te - $ts) / 1000000))'", "text": "'$text'" }'
@@ -38,9 +37,11 @@ run() {
 }
 
 close() {
-  type "--left-ctrl --a" 0.5
-  type "--del" 0.5
-  type "--left-alt --f4" 0.5
+  type "--left-ctrl --a" 
+  sleep 0.5
+  type "--del"
+  sleep 0.5
+  type "--left-alt --f4"
 }
 
 if [ "$1" == "start" ]; then

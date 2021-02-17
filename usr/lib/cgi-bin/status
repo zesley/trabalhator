@@ -1,24 +1,28 @@
 #!/bin/bash
-echo 'Content-type: application/json'
 ks=$(systemctl status keyboard.service | grep "Active:" | awk '{ print $2 }')
 ms=$(systemctl status mouse.service | grep "Active:" | awk '{ print $2 }')
 keyboard=$(tail -1 /usr/lib/cgi-bin/keyboard.log)
+if [ "$keyboard" == "" ]; then
+    keyboard='""'
+fi
 mouse=$(tail -1 /usr/lib/cgi-bin/mouse.log)
-type=$(tail -1 /usr/lib/cgi-bin/type.log)
-move=$(tail -1 /usr/lib/cgi-bin/move.log)
+if [ "$mouse" == "" ]; then
+    mouse='""'
+fi
+    type=$(tail -1 /usr/lib/cgi-bin/type.log)
+if [ "$type" == "" ]; then
+    type='""'
+fi
+    move=$(tail -1 /usr/lib/cgi-bin/move.log)
+if [ "$move" == "" ]; then
+    move='""'
+fi
+echo 'Content-type: application/json'
 echo ''
 echo '{'
-if [ "$keyboard" != "" ]; then
 echo ' "keyboard": { "status": "'$ks'", "log": '$keyboard' },'
-fi
-if [ "$mouse" != "" ]; then
 echo ' "mouse": { "status": "'$ms'", "log": '$mouse' },'
-fi
-if [ "$type" != "" ]; then
 echo ' "type": { "log": '$type' },'
-fi
-if [ "$move" != "" ]; then
 echo ' "move": { "log": '$move' }'
-fi
 echo '}'
 echo ''

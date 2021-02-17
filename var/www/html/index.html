@@ -23,7 +23,7 @@
             var content = "";
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
-              if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.log != "undefined") {
+              if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.log != "undefined" && result.keyboard.log !== "") {
                 keyboard = string_keyboard;
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px;'>" + time + "</div>";
@@ -36,7 +36,7 @@
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
-              if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.log != "undefined") {
+              if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.log != "undefined" && result.mouse.log !== "") {
                 mouse = string_mouse; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
@@ -49,19 +49,20 @@
             }
             if (typeof result.type != "undefined") {
               var string_type = JSON.stringify(result.type);
-              if (string_type !== type && typeof result.type.log != "undefined") {
+              if (string_type !== type && typeof result.type.log != "undefined" && result.type.log !== "") {
                 type = string_type; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
                 content += "<div style='width: 80px;'>" + "Type" + "</div>";
                 content += "<div style='width: 60px;' class='overflow'>" + result.type.log.exec + "</div>";
-                content += "<div style='width: calc(100% - 300px);'>Keys: " + result.type.log.keys + "</div>";
+                content += "<div style='width: 100px;' class='overflow'>Report: " + result.type.log.report + "</div>";
+                content += "<div style='width: calc(100% - 400px);'>Keys: " + result.type.log.keys + "</div>";
 		            content += "</div>";
               }
             }
             if (typeof result.move != "undefined") {
               var string_move = JSON.stringify(result.move);
-              if (string_move !== move && typeof result.move.log != "undefined") {
+              if (string_move !== move && typeof result.move.log != "undefined" && result.move.log !== "") {
                 move = string_move; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
@@ -97,11 +98,11 @@
         });
 
         $("#showkeyboard").click(function() {
-          $("#keyboard").toggleClass("hiden");
+          $("#div-keyboard").toggleClass("hiden");
         });
 
         $("#showmouse").click(function() {
-          $("#mouse").toggleClass("hiden");
+          $("#div-mouse").toggleClass("hiden");
         });
 
         $("#composity").click(function(e) {
@@ -250,6 +251,17 @@
           e.preventDefault();
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 3, x: 0, y: 0 }));
         });
+
+        function size () {
+          var size = $("#div-keyboard").width() / 90;
+          keyboard.style.fontSize = size + 'px';
+        }
+
+        var keyboard = document.querySelector('.keyboard');
+        window.addEventListener('resize', function (e) {
+          size();
+        });
+        size();
       });
     </script>
     <style>
@@ -582,7 +594,7 @@
       Mouse
     </div>
     
-    <div class="hiden" id="keyboard">
+    <div class="hiden" id="div-keyboard">
       <div class="keyboard" >
         <div class="keyboard__row keyboard__row--h1">
             <div data-key="--esc" class="key--word key">
@@ -933,7 +945,7 @@
       </div>
     </div>
 
-    <div class="hiden" id="mouse">
+    <div class="hiden" id="div-mouse">
       <div class="mousearea">
         <div class="avua-mouse composity-off" id="hold-indicator"></div>
         <div style="width: 100%; height: 80%; background-color: lightgray;" id="touchpad"></div>
