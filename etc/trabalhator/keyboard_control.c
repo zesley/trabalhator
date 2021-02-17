@@ -18,14 +18,14 @@ struct options {
 };
 
 static struct options kmod[] = {
-	{.opt = "-left-ctrl",						.val = 0x01},
-	{.opt = "-right-ctrl",						.val = 0x10},
-	{.opt = "-left-shift",						.val = 0x02},
-	{.opt = "-right-shift",						.val = 0x20},
-	{.opt = "-left-alt",						.val = 0x04},
-	{.opt = "-right-alt",						.val = 0x40},
-	{.opt = "-left-meta",						.val = 0x08},
-	{.opt = "-right-meta",						.val = 0x80},
+	{.opt = "-leftctrl",						.val = 0x01},
+	{.opt = "-rightctrl",						.val = 0x10},
+	{.opt = "-leftshift",						.val = 0x02},
+	{.opt = "-rightshift",						.val = 0x20},
+	{.opt = "-leftalt",							.val = 0x04},
+	{.opt = "-rightalt",						.val = 0x40},
+	{.opt = "-leftmeta",						.val = 0x08},
+	{.opt = "-rightmeta",						.val = 0x80},
 	{.opt = NULL}
 };
 
@@ -206,7 +206,7 @@ int main(int argc, char *argv[]) {
 	FD_ZERO(&rfds);
 	FD_SET(fd, &rfds);
 
-	retval = select(fd + 1, &rfds, NULL, NULL, tv);
+	retval = select(fd, &rfds, NULL, NULL, tv);
 	if (retval == -1 && errno == EINTR) {
 		return 5;
 	}
@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
 	if (FD_ISSET(fd, &rfds)) {
 		cmd_len = read(fd, buf, BUF_LEN - 1);
 		for (i = 0; i < cmd_len; i++) {
-			printf("%hhu", buf[i]);
+			printf("%02x", buf[i]);
 		}
 	}
 
