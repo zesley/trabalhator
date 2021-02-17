@@ -22,20 +22,20 @@ run() {
     x="x00"
     y="x00"
     if [ $cin == 0 ]; then
-      x="x01"
+      x="x03"
       cin=1
     elif [ $cin == 1 ]; then
-      y="x01"
+      y="x03"
       cin=2
     elif [ $cin == 2 ]; then
-      x="xff"
+      x="xfd"
       cin=3
     elif [ $cin == 3 ]; then
-      y="xff"
+      y="xfd"
       cin=0
     fi
 
-    move "$x" "$y" 0.25
+    move "$x" "$y" 1
 
     x=$(echo "obase=10; ibase=16; $(echo $x | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)
     y=$(echo "obase=10; ibase=16; $(echo $y | tr '[a-z]' '[A-Z]' | sed 's/[x-X]//')" | bc)

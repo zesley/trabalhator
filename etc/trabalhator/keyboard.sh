@@ -2,20 +2,21 @@
 
 type() {
   /etc/trabalhator/keyboard_control /dev/hidg0 $1
+  sleep $2
 }
 
 typelong() {
   text=$1
   for i in $(seq 1 ${#text})
   do
-    type "--${text:i-1:1}"
+    type "-${text:i-1:1}" $2
   done
 }
 
 open() {
-  type "--right-meta --r" 1
-  typelong "notepad"
-  type "--return" 1
+  type "-right-meta -r"  0.05
+  typelong "notepad" 0.01
+  type "-return" 1
 }
 
 run() {
@@ -25,10 +26,10 @@ run() {
     size=$(tr -dc '0-9' < /dev/urandom | head -n 1 | head --bytes 2 ; echo '')
     if [ "$size" != "00" ]; then
       text=$(tr -dc 'a-z' < /dev/urandom | head -c $size ; echo '')
-      typelong $text
+      typelong $text 0.01
       for i in $(seq 1 1 $size)
       do
-        type "--bckspc"
+        type "-bckspc" 0.01
       done
       te=$(date +%s%N)
       echo '{ "size": "'$size'", "exec": "'$((($te - $ts) / 1000000))'", "text": "'$text'" }'
@@ -37,11 +38,9 @@ run() {
 }
 
 close() {
-  type "--left-ctrl --a" 
-  sleep 0.5
-  type "--del"
-  sleep 0.5
-  type "--left-alt --f4"
+  type "-left-ctrl -a" 0.5
+  type "-del" 0.5
+  type "-left-alt -f4" 0.5
 }
 
 if [ "$1" == "start" ]; then
