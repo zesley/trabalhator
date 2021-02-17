@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
 	if (FD_ISSET(fd, &rfds)) {
 		cmd_len = read(fd, buf, BUF_LEN - 1);
 		for (i = 0; i < cmd_len; i++) {
-			printf("%hhx", buf[i]);
+			printf("%hhu", buf[i]);
 		}
 	}
 
