@@ -14,9 +14,12 @@ typelong() {
 }
 
 open() {
-  type "-right-meta -r"  0.05
+  ts=$(date +%s%N)
+  type "-rightmeta -r"  0.5
   typelong "notepad" 0.01
   type "-return" 1
+  te=$(date +%s%N)
+  echo '"size": "10", "exec": "'$((($te - $ts) / 1000000))'", "text": "meta r notepad return"'
 }
 
 run() {
@@ -32,15 +35,18 @@ run() {
         type "-bckspc" 0.01
       done
       te=$(date +%s%N)
-      echo '{ "size": "'$size'", "exec": "'$((($te - $ts) / 1000000))'", "text": "'$text'" }'
+      echo '"size": "'$size'", "exec": "'$((($te - $ts) / 1000000))'", "text": "'$text'"'
     fi
   done
 }
 
 close() {
-  type "-left-ctrl -a" 0.5
+  ts=$(date +%s%N)
+  type "-leftctrl -a" 0.5
   type "-del" 0.5
-  type "-left-alt -f4" 0.5
+  type "-leftalt -f4" 0.5
+  te=$(date +%s%N)
+  echo '"size": "5", "exec": "'$((($te - $ts) / 1000000))'", "text": "ctrl a del alt f4"'
 }
 
 if [ "$1" == "start" ]; then

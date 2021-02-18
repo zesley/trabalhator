@@ -6,6 +6,6 @@ fi
 echo 'Content-type: application/json'
 echo ''
 echo '{'
-echo ' "mouse": { "status": "inactive" }'
+echo ' "mouse": { "status": "inactvating" }'
 echo '}'
 echo ''

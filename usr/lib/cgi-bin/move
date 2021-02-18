@@ -1,6 +1,7 @@
 #!/bin/bash
-sudo /etc/trabalhator/move.sh $QUERY_STRING > /dev/null 2>&1 &
+sudo /etc/trabalhator/move.sh $QUERY_STRING
+move=$(tail -1 /usr/lib/cgi-bin/move.log)
 echo 'Content-type: application/json'
 echo ''
-echo '{ "moved": "true" }'
+echo $move
 echo '' 

@@ -23,75 +23,75 @@
             var content = "";
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
-              if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.log != "undefined" && result.keyboard.log !== "") {
+              if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.exec != "undefined") {
                 keyboard = string_keyboard;
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px;'>" + time + "</div>";
-                content += "<div style='width: 80px;'>" + "Keyboard" + "</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.keyboard.log.exec + "</div>";
-                content += "<div style='width: 75px;'>Size: " + result.keyboard.log.size + "</div>";
-                content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.log.text + "</div>";
+                content += "<div style='width: 80px;'>Keyboard</div>";
+                content += "<div style='width: 60px;' class='overflow'>" + result.keyboard.exec + "</div>";
+                content += "<div style='width: 75px;'>Size: " + result.keyboard.size + "</div>";
+                content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
                 content += "</div>";
               }
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
-              if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.log != "undefined" && result.mouse.log !== "") {
+              if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.exec != "undefined") {
                 mouse = string_mouse; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
-                content += "<div style='width: 80px;'>" + "Mouse" + "</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.mouse.log.exec + "</div>";
-                content += "<div style='width: 75px;'>X: " + result.mouse.log.x + "</div>";
-                content += "<div style='width: 75px;'>Y: " + result.mouse.log.y + "</div>";
+                content += "<div style='width: 80px;'>Mouse</div>";
+                content += "<div style='width: 60px;' class='overflow'>" + result.mouse.exec + "</div>";
+                content += "<div style='width: 75px;'>X: " + result.mouse.x + "</div>";
+                content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
 		            content += "</div>";
               }
             }
             if (typeof result.type != "undefined") {
               var string_type = JSON.stringify(result.type);
-              if (string_type !== type && typeof result.type.log != "undefined" && result.type.log !== "") {
+              if (string_type !== type) {
                 type = string_type; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
-                content += "<div style='width: 80px;'>" + "Type" + "</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.type.log.exec + "</div>";
-                if (result.type.log.report.n === "1") {
+                content += "<div style='width: 80px;'>Type</div>";
+                content += "<div style='width: 60px;' class='overflow'>" + result.type.exec + "</div>";
+                if (result.type.report.n === "1") {
                   $("#num-indicator").addClass("on");
                   $("#num-indicator").removeClass("off");
                 } else {
                   $("#num-indicator").removeClass("on");
                   $("#num-indicator").addClass("off");
                 }
-                if (result.type.log.report.c === "1") {
+                if (result.type.report.c === "1") {
                   $("#caps-indicator").addClass("on");
                   $("#caps-indicator").removeClass("off");
                 } else {
                   $("#caps-indicator").removeClass("on");
                   $("#caps-indicator").addClass("off");
                 }
-                if(result.type.log.report.s === "1") {
+                if(result.type.report.s === "1") {
                   $("#scroll-indicator").addClass("on");
                   $("#scroll-indicator").removeClass("off");
                 } else {
                   $("#scroll-indicator").removeClass("on");
                   $("#scroll-indicator").addClass("off");
                 }
-                var t = result.type.log.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("kp", "").replaceAll("-", "");
+                var t = result.type.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("kp", "").replaceAll("-", "");
                 content += "<div style='width: calc(100% - 300px);'>Keys: " + t + "</div>";
 		            content += "</div>";
               }
             }
             if (typeof result.move != "undefined") {
               var string_move = JSON.stringify(result.move);
-              if (string_move !== move && typeof result.move.log != "undefined" && result.move.log !== "") {
+              if (string_move !== move) {
                 move = string_move; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
-                content += "<div style='width: 80px;'>" + "Move" + "</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.move.log.exec + "</div>";
-                content += "<div style='width: 75px;'>B: " + result.move.log.b + "</div>";
-                content += "<div style='width: 75px;'>X: " + result.move.log.x + "</div>";
-                content += "<div style='width: 75px;'>Y: " + result.move.log.y + "</div>";
+                content += "<div style='width: 80px;'>Move</div>";
+                content += "<div style='width: 60px;' class='overflow'>" + result.move.exec + "</div>";
+                content += "<div style='width: 75px;'>B: " + result.move.b + "</div>";
+                content += "<div style='width: 75px;'>X: " + result.move.x + "</div>";
+                content += "<div style='width: 75px;'>Y: " + result.move.y + "</div>";
 		            content += "</div>";
               }
             }
@@ -190,54 +190,48 @@
           }
         });
 
-        var moving=false;
-        var lx=0;
-        var ly=0;
+        var bx=0;
+        var by=0;
+        var ex=0;
+        var ey=0;
 
         $("#touchpad").on("mousedown",function(e) {
           e.preventDefault();
-          lx=e.offsetX;
-          ly=e.offsetY;
-          moving=true;
+          bx=e.offsetX;
+          by=e.offsetY;
         });
 
         $("#touchpad").on("mousemove", function(e) {
           e.preventDefault();
-          sendMove(e.offsetX, e.offsetY);
+          ex=e.offsetX;
+          ey=e.offsetY;
         });
 
         $("#touchpad").on("mouseup", function(e) {
           e.preventDefault();
-          moving=false;
+          sendMove(ex - bx, ey - by);
         });
 
         $("#touchpad").on('touchstart', function(e) {
           e.preventDefault();
-          lx=e.touches[0].pageX;
-          ly=e.touches[0].pageY;
-          moving=true;
+          bx=e.touches[0].pageX;
+          by=e.touches[0].pageY;
         });
         
         $("#touchpad").on('touchmove', function(e) {
           e.preventDefault();
-          sendMove(e.touches[0].pageX, e.touches[0].pageY);
+          ex=e.touches[0].pageX;
+          ey=e.touches[0].pageY;
         });
 
         $("#touchpad").on('touchend', function(e) {
           e.preventDefault();
-          moving=false;
+          sendMove(ex - bx, ey - by);
         });
       
         function sendMove(x, y) {
-          if (moving) {
-            var dx = parseInt(x - lx);
-            var dy = parseInt(y - ly);
-            if (dx != 0 && dy != 0) {
-              lx=x;
-              ly=y;
-              callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasHold ? 1 : 0, x: dx, y: dy }));
-            }
-          }
+          if (x != 0 && y != 0)
+            callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: hasHold ? 1 : 0, x: parseInt(x), y: parseInt(y) }));
         }
 
         $("#b1").click(function(e) {

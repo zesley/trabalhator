@@ -3,26 +3,21 @@ ks=$(systemctl status keyboard.service | grep "Active:" | awk '{ print $2 }')
 ms=$(systemctl status mouse.service | grep "Active:" | awk '{ print $2 }')
 keyboard=$(tail -1 /usr/lib/cgi-bin/keyboard.log)
 if [ "$keyboard" == "" ]; then
-    keyboard='""'
+    keyboard=""
+else
+    keyboard=","$keyboard
 fi
 mouse=$(tail -1 /usr/lib/cgi-bin/mouse.log)
 if [ "$mouse" == "" ]; then
-    mouse='""'
-fi
-    type=$(tail -1 /usr/lib/cgi-bin/type.log)
-if [ "$type" == "" ]; then
-    type='""'
-fi
-    move=$(tail -1 /usr/lib/cgi-bin/move.log)
-if [ "$move" == "" ]; then
-    move='""'
+    mouse=""
+else
+    mouse=","$mouse
 fi
 echo 'Content-type: application/json'
 echo ''
 echo '{'
-echo ' "keyboard": { "status": "'$ks'", "log": '$keyboard' },'
-echo ' "mouse": { "status": "'$ms'", "log": '$mouse' },'
-echo ' "type": { "log": '$type' },'
-echo ' "move": { "log": '$move' }'
+echo ' "keyboard": { "status": "'$ks'" '$keyboard' },'
+echo ' "mouse": { "status": "'$ms'" '$mouse' }'
 echo '}'
 echo ''
+d

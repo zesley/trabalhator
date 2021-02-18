@@ -1,6 +1,7 @@
 #!/bin/bash
-sudo /etc/trabalhator/type.sh $QUERY_STRING > /dev/null 2>&1 &
+sudo /etc/trabalhator/type.sh $QUERY_STRING
+type=$(tail -1 /usr/lib/cgi-bin/type.log)
 echo 'Content-type: application/json'
 echo ''
-echo '{ "typed": "true" }'
+echo $type
 echo '' 
