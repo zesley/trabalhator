@@ -55,9 +55,29 @@
                 content += "<div style='width: 160px'>" + time + "</div>";
                 content += "<div style='width: 80px;'>" + "Type" + "</div>";
                 content += "<div style='width: 60px;' class='overflow'>" + result.type.log.exec + "</div>";
-                content += "<div style='width: 75px;' class='overflow'>R: " + (result.type.log.report === "" ? "N/A" : result.type.log.report) + "</div>";
-                var t = result.type.log.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("-", "");
-                content += "<div style='width: calc(100% - 375px);'>Keys: " + t + "</div>";
+                if (result.type.log.report.n === "1") {
+                  $("#num-indicator").addClass("on");
+                  $("#num-indicator").removeClass("off");
+                } else {
+                  $("#num-indicator").removeClass("on");
+                  $("#num-indicator").addClass("off");
+                }
+                if (result.type.log.report.c === "1") {
+                  $("#caps-indicator").addClass("on");
+                  $("#caps-indicator").removeClass("off");
+                } else {
+                  $("#caps-indicator").removeClass("on");
+                  $("#caps-indicator").addClass("off");
+                }
+                if(result.type.log.report.s === "1") {
+                  $("#scroll-indicator").addClass("on");
+                  $("#scroll-indicator").removeClass("off");
+                } else {
+                  $("#scroll-indicator").removeClass("on");
+                  $("#scroll-indicator").addClass("off");
+                }
+                var t = result.type.log.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("kp", "").replaceAll("-", "");
+                content += "<div style='width: calc(100% - 300px);'>Keys: " + t + "</div>";
 		            content += "</div>";
               }
             }
@@ -108,30 +128,14 @@
 
         $("#composity").click(function(e) {
           e.preventDefault();
-          $("#composit-indicator").toggleClass("composity-on");
-          $("#composit-indicator").toggleClass("composity-off");
-          $("#hold-indicator").toggleClass("composity-on");
-          $("#hold-indicator").toggleClass("composity-off");
           hasHold = !hasHold;
-
-          if (!hasHold && typed.length > 0) {
-            callAjax('/cgi-bin/type?keys=' + typed);
-            typed = [];
-          }
+          hold();
         });
 
-        $("#hold-indicator").click(function(e) {
+        $("#m-hold-indicator").click(function(e) {
           e.preventDefault();
-          $("#composit-indicator").toggleClass("composity-on");
-          $("#composit-indicator").toggleClass("composity-off");
-          $("#hold-indicator").toggleClass("composity-on");
-          $("#hold-indicator").toggleClass("composity-off");
           hasHold = !hasHold;
-
-          if (!hasHold && typed.length > 0) {
-            callAjax('/cgi-bin/type?keys=' + typed);
-            typed = [];
-          }
+          hold();
         });
 
         var hasHold = false;
@@ -141,24 +145,27 @@
 
         $(document).on('keyup keydown', function(e){
           hasHold = e.ctrlKey;
-          
+          hold();
+        });
+
+        function hold() {
           if (hasHold) {
-            $("#composit-indicator").addClass("composity-on");
-            $("#composit-indicator").removeClass("composity-off");
-            $("#hold-indicator").addClass("composity-on");
-            $("#hold-indicator").removeClass("composity-off");
+            $("#k-hold-indicator").addClass("on");
+            $("#k-hold-indicator").removeClass("off");
+            $("#m-hold-indicator").addClass("on");
+            $("#m-hold-indicator").removeClass("off");
           } else {
-            $("#composit-indicator").removeClass("composity-on");
-            $("#composit-indicator").addClass("composity-off");
-            $("#hold-indicator").removeClass("composity-on");
-            $("#hold-indicator").addClass("composity-off");
+            $("#k-hold-indicator").removeClass("on");
+            $("#k-hold-indicator").addClass("off");
+            $("#m-hold-indicator").removeClass("on");
+            $("#m-hold-indicator").addClass("off");
           }
           
           if (!hasHold && typed.length > 0) {
             callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
           }
-        });
+        }
 
         $('.key').on('click', function(e) {
           var key = null;
@@ -458,6 +465,7 @@
         background: none !important;
         box-shadow: none !important;
         width: 3em !important;
+        color: black !important;
       }
 
       .square {
@@ -513,11 +521,11 @@
         border: 1px solid black;
       } 
 
-      .composity-on {
+      .on {
         background-color: green;
       }
 
-      .composity-off {
+      .off {
         background-color: red;
       }
 
@@ -646,12 +654,21 @@
               <span>Pause</span>
             </div>
             <div class="small-space"></div>
-            <div class="key-space"></div>
-            <div class="key-space"></div>
-            <div class="key-space"></div>
+            <div class="key-space">
+              <div>N</div>
+              <div id="num-indicator" class="avua off"></div>
+            </div>
+            <div class="key-space">
+              <div>C</div>
+              <div id="caps-indicator" class="avua off"></div>
+            </div>
+            <div class="key-space">
+              <div>S</div>
+              <div id="scroll-indicator" class="avua off"></div>
+            </div>
             <div class="key--double" id="composity">
-              <span>Comp</span>
-              <div class="avua composity-off" id="composit-indicator"></div>
+              <span>Hold</span>
+              <div class="avua off" id="k-hold-indicator"></div>
             </div>
         </div>
         <div class="keyboard__row">
@@ -827,7 +844,7 @@
             <div>6</div>
             <div>Right</div>
             </div>
-            <div class="key-space"></div>
+            <div class="key-space" style="z-index: -1;"></div>
         </div>
         <div class="keyboard__row">
             <div class="key--bottom-left key--word key--w7 key" data-key="-leftshift">
@@ -874,7 +891,7 @@
             <div>3</div>
             <div>PgDn</div>
             </div>
-            <div class="key-space"></div>
+            <div class="key-space" sytle="z-index: -1;"></div>
         </div>
         <div class="keyboard__row">
             <div class="key--bottom-left key--word key--w4 key" data-key="-leftctrl">
@@ -943,7 +960,7 @@
 
     <div class="hiden" id="div-mouse">
       <div class="mousearea">
-        <div class="avua-mouse composity-off" id="hold-indicator"></div>
+        <div class="avua-mouse off" id="m-hold-indicator"></div>
         <div style="width: 100%; height: 80%; background-color: lightgray;" id="touchpad"></div>
         <div style="width: 100%; height: 20%; display: flex;">
           <div class="mouse-button" id="b1"></div>

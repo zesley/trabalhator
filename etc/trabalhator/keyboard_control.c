@@ -136,16 +136,17 @@ int main(int argc, char *argv[]) {
 	char buf[BUF_LEN];
 	int cmd_len = 0;
 	char report[8];
+	char led[1];
 	int typed = 0;
 	int hold = 0;
 	int key = 0;
 	fd_set rfds;
-	int retval, i, j;
+	int retval, i, j, caps, num, scrl;
 	struct timeval *tv;
 	tv = malloc(sizeof(struct timeval));
 	tv->tv_sec = 0;
 	tv->tv_usec = 10000;
-	unsigned int usecs = 10000;
+	unsigned int usecs = 50000;
 
 	if (argc < 3) {
 		return 1;
@@ -206,19 +207,19 @@ int main(int argc, char *argv[]) {
 	FD_ZERO(&rfds);
 	FD_SET(fd, &rfds);
 
-	retval = select(fd, &rfds, NULL, NULL, tv);
+	retval = select(fd + 1, &rfds, NULL, NULL, tv);
 	if (retval == -1 && errno == EINTR) {
-		return 5;
+		return 6;
 	}
 
 	if (retval < 0) {
-		return 6;
+		return 7;
 	}
 
 	if (FD_ISSET(fd, &rfds)) {
 		cmd_len = read(fd, buf, BUF_LEN - 1);
 		for (i = 0; i < cmd_len; i++) {
-			printf("%02x", buf[i]);
+			printf("\"n\": \"%d\", \"c\": \"%d\", \"s\": \"%d\"", (buf[i] & (1<<0)) != 0, (buf[i] & (1<<1)) != 0, (buf[i] & (1<<2)) != 0);
 		}
 	}
 
