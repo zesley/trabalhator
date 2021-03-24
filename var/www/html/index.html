@@ -11,6 +11,7 @@
         var keyboard = null;
         var type = null;
         var move = null;
+        var log_count = 0;
         function callAjax(url) {
           $.ajax({ url: url, success: function( result ) {
             var t = new Date();
@@ -32,6 +33,7 @@
                 content += "<div style='width: 75px;'>Size: " + result.keyboard.size + "</div>";
                 content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
                 content += "</div>";
+                log_count++;
               }
             }
             if (typeof result.mouse != "undefined") {
@@ -45,6 +47,7 @@
                 content += "<div style='width: 75px;'>X: " + result.mouse.x + "</div>";
                 content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
 		            content += "</div>";
+                log_count++;
               }
             }
             if (typeof result.type != "undefined") {
@@ -79,6 +82,7 @@
                 var t = result.type.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("kp", "").replaceAll("-", "");
                 content += "<div style='width: calc(100% - 300px);'>Keys: " + t + "</div>";
 		            content += "</div>";
+                log_count++;
               }
             }
             if (typeof result.move != "undefined") {
@@ -93,10 +97,16 @@
                 content += "<div style='width: 75px;'>X: " + result.move.x + "</div>";
                 content += "<div style='width: 75px;'>Y: " + result.move.y + "</div>";
 		            content += "</div>";
+                log_count++;
               }
             }
-            if (content !== "")
+            if (content !== "") {
+              if (log_count > 1000) {
+                $("#result").html("");
+                log_count = 0;
+              }
               $("#result").prepend(content);
+            }
           }});
         }
         setInterval(function(){
