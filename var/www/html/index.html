@@ -164,19 +164,25 @@
           
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
+            if (!shiftHold)
+              typed.push("shift");
             udapteHold();
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
+            if (!ctrlHold)
+              removeTyped("ctrl");
             udapteHold();
           } else if (key.includes("alt")) {
             altHold = !altHold;
+            if (!altHold)
+              removeTyped("alt");
             udapteHold();
           } else {
+            callAjax('/cgi-bin/type?keys=' + typed);
             altHold = false;
             ctrlHold = false;
             shiftHold = false;
             udapteHold();
-            callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
           }
         });
@@ -203,6 +209,10 @@
             $("#shift-hold-indicator").removeClass("on");
             $("#shift-hold-indicator").addClass("off");
           }
+        }
+
+        function removeTyped (item) {
+          typed = typed.filter(i => i !== item);
         }
 
         var bx=0;
