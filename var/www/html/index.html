@@ -124,9 +124,6 @@
         $("#mstop").click(function() {
           callAjax("/cgi-bin/mstop");
         });
-        $("#clear").click(function() {
-          $("#result").html("");
-        });
 
         $("#showkeyboard").click(function() {
           $("#div-keyboard").toggleClass("hiden");
@@ -136,12 +133,6 @@
           $("#div-mouse").toggleClass("hiden");
         });
 
-        $("#composity").click(function(e) {
-          e.preventDefault();
-          hasHold = !hasHold;
-          hold();
-        });
-
         $("#m-hold-indicator").click(function(e) {
           e.preventDefault();
           hasHold = !hasHold;
@@ -149,14 +140,8 @@
         });
 
         var hasHold = false;
-        var hasMod = false;
 
         var typed = [];
-
-        $(document).on('keyup keydown', function(e){
-          hasHold = e.ctrlKey;
-          hold();
-        });
 
         function hold() {
           if (hasHold) {
@@ -419,18 +404,15 @@
         line-height: 2.8em;
       }
 
-      .key--bottom-left > * {
-        position: absolute;
-        text-align: left;
-        bottom: 0.4em;
-        left: 0.4em;
+      .key--bottom > * {
+        position: relative;
       }
 
-      .key--bottom-right > * {
+      .key--bottom-left {
         position: absolute;
-        text-align: right;
         bottom: 0.4em;
-        right: 0.4em;
+        left: 0.4em;
+        text-align: left;
       }
 
       .key--word > * {
@@ -559,20 +541,28 @@
     </style> 
   </head>
   <body>
-        <div class="flex center">
-          <h2>Trabalhator 3.0</h2>
-        </div>
 	      <div class="flex between">
           <div>
-            <h3>Keyboard</h3> 
- 	    <div class="flex">
-	      <div id="kstart" class="button flex center">START</div>
-	      <div id="kstop" class="button flex center">STOP</div>
+            <div class="flex center">
+              <div id="showkeyboard" class="button flex center">
+                Keyboard
+              </div>
+            </div>
+ 	          <div class="flex">
+              <div id="kstart" class="button flex center">START</div>
+              <div id="kstop" class="button flex center">STOP</div>
             </div>
           </div>
+          <div class="flex center">
+            <h2>Trabalhator 3.0</h2>
+          </div>
           <div>
-	    <h3>Mouse</h3>
-	    <div class="flex">
+            <div class="flex center">
+              <div id="showmouse" class="button flex center">
+                Mouse
+              </div>
+            </div>
+	          <div class="flex">
               <div id="mstart" class="button flex center">START</div>
               <div id="mstop" class="button flex center">STOP</div>
             </div>
@@ -588,20 +578,8 @@
               <div style='width: calc(100% - 375px);'></div>
 	    </div>
 	    <div id="result"></div>
-          </div>
-    <div style="display: flex; justify-content: flex-end;">
-      <div id="clear" class="button flex center">CLEAR</div>
       </div>
-    <div>
 
-    <div id="showkeyboard" class="button flex center">
-      Keyboard
-    </div>
-
-    <div id="showmouse" class="button flex center">
-      Mouse
-    </div>
-    
     <div class="hiden" id="div-keyboard">
       <div class="keyboard" >
         <div class="keyboard__row keyboard__row--h1">
@@ -670,9 +648,7 @@
               <div>S</div>
               <div id="scroll-indicator" class="avua off"></div>
             </div>
-            <div class="key--double" id="composity">
-              <span>Hold</span>
-              <div class="avua off" id="k-hold-indicator"></div>
+            <div class="key-space">
             </div>
         </div>
         <div class="keyboard__row">
@@ -728,7 +704,7 @@
             <div>+</div>
             <div>=</div>
             </div>
-            <div class="key--bottom-right key--word key--w4 key" style="font-size: 1em" data-key="-bckspc">
+            <div class="key--bottom key--word key--w4 key" style="font-size: 1em" data-key="-bckspc">
             <span>&larrfs;</span>
             </div>
             <div class="small-space"></div>
@@ -756,7 +732,7 @@
             </div>
         </div>
         <div class="keyboard__row">
-            <div class="key--bottom-left key--word key--w4 key" data-key="-tab">
+            <div class="key--bottom key--word key--w4 key" data-key="-tab">
             <span>Tab</span>
             </div>
             <div class="key--letter key" data-key="-q">Q</div>
@@ -809,7 +785,7 @@
             </div>
         </div>
         <div class="keyboard__row">
-            <div class="key--bottom-left key--word key--w5 key" data-key="-capslock">
+            <div class="key--bottom key--word key--w5 key" data-key="-capslock">
             <span>CapsLk</span>
             </div>
             <div class="key--letter key" data-key="-a">A</div>
@@ -829,7 +805,7 @@
             <div>"</div>
             <div>'</div>
             </div>
-            <div class="key--bottom-right key--word key--w5 key" data-key="-return">
+            <div class="key--bottom key--word key--w5 key" data-key="-return">
             <span>&crarr;</span>
             </div>
             <div class="small-space"></div>
@@ -851,8 +827,9 @@
             <div class="key-space" style="z-index: -1;"></div>
         </div>
         <div class="keyboard__row">
-            <div class="key--bottom-left key--word key--w7 key" data-key="-leftshift">
-            <span>Shift</span>
+            <div class="key--bottom key--word key--w7 key" data-key="-leftshift">
+              <div class="key--bottom-left">Shift</div>
+              <div class="avua off" id="shift-hold-indicator"></div>
             </div>
             <div class="key--letter key" data-key="-z">Z</div>
             <div class="key--letter key" data-key="-x">X</div>
@@ -873,8 +850,9 @@
             <div>?</div>
             <div>/</div>
             </div>
-            <div class="key--bottom-right key--word key--w7 key" data-key="-rightshift">
-            <span>Shift</span>
+            <div class="key--bottom key--word key--w7 key" data-key="-rightshift">
+              <div class="avua off" id="shift-hold-indicator"></div>
+              <div class="key--bottom-left">Shift</div>
             </div>
             <div class="small-space"></div>
             <div class="key-space"></div>
@@ -898,10 +876,11 @@
             <div class="key-space" sytle="z-index: -1;"></div>
         </div>
         <div class="keyboard__row">
-            <div class="key--bottom-left key--word key--w4 key" data-key="-leftctrl">
-            <span>Ctrl</span>
+            <div class="key--bottom key--word key--w4 key" data-key="-leftctrl">
+              <div class="avua off" id="ctrl-hold-indicator"></div>
+              <div class="key--bottom-left">Ctrl</div>
             </div>
-            <div class="key--bottom-left key--word key" data-key="-leftmeta">
+            <div class="key--bottom key--word key" data-key="-leftmeta">
                 <div>
                     <div style="display: flex;">
                         <div class="square">&nbsp;</div>
@@ -913,24 +892,27 @@
                     </div>
                 </div>
             </div>
-            <div class="key--bottom-right key--word key--w3 key" data-key="-leftalt">
-            <span>Alt</span>
+            <div class="key--bottom key--word key--w3 key" data-key="-leftalt">
+              <div class="avua off" id="alt-hold-indicator"></div>
+              <div class="key--bottom-left">Alt</div>
             </div>
             <div class="key--double key--right key--space key" data-key="-spacebar">
             &nbsp;
             </div>
-            <div class="key--bottom-left key--word key--w3 key" data-key="-rightalt">
-            <span>Alt</span>
+            <div class="key--bottom key--word key--w3 key" data-key="-rightalt">
+              <div class="avua off" id="alt-hold-indicator"></div>
+              <div class="key--bottom-left">Alt</div>
             </div>
-            <div class="key--bottom-left key--word key--w1 key" data-key="-app">
+            <div class="key--bottom key--word key--w1 key" data-key="-app">
               <div>
                 <div class="box">&nbsp;</div>
                 <div class="box">&nbsp;</div>
                 <div class="box">&nbsp;</div>
               </div>
             </div>
-        <div class="key--bottom-left key--word key--w4 key" data-key="-rightctrl">
-            <span>Ctrl</span>
+            <div class="key--bottom key--word key--w4 key" data-key="-rightctrl">
+              <div class="avua off" id="ctrl-hold-indicator"></div>
+              <div class="key--bottom-left">Ctrl</div>
             </div>
             <div class="small-space"></div>
             <div class="key--letter key" data-key="-left">
@@ -957,9 +939,6 @@
             </div>
         </div>
       </div>
-      <div style="margin: 10px;">
-        <span>*hold your Keyboard CTRL to send a composity command</span>
-      </div>
     </div>
 
     <div class="hiden" id="div-mouse">
@@ -973,9 +952,6 @@
           <hr>
           <div class="mouse-button" id="b2"></div>
         </div>
-      </div>
-      <div style="margin: 10px; padding-top: 325px;">
-        <span>*Click inside the touchpad to start move, relase to stop, use your Keyboard CTRL to hold</span>
       </div>
     </div>
   </body>
