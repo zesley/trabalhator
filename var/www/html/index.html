@@ -164,36 +164,46 @@
           
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
-            if (shiftHold) {
-              $("#shift-hold-indicator").addClass("on");
-              $("#shift-hold-indicator").removeClass("off");
-            } else {
-              $("#shift-hold-indicator").removeClass("on");
-              $("#shift-hold-indicator").addClass("off");
-            }
+            udapteHold();
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
-            if (ctrlHold) {
-              $("#ctrl-hold-indicator").addClass("on");
-              $("#ctrl-hold-indicator").removeClass("off");
-            } else {
-              $("#ctrl-hold-indicator").removeClass("on");
-              $("#ctrl-hold-indicator").addClass("off");
-            }
+            udapteHold();
           } else if (key.includes("alt")) {
             altHold = !altHold;
-            if (altHold) {
-              $("#alt-hold-indicator").addClass("on");
-              $("#alt-hold-indicator").removeClass("off");
-            } else {
-              $("#alt-hold-indicator").removeClass("on");
-              $("#alt-hold-indicator").addClass("off");
-            }
+            udapteHold();
           } else {
             callAjax('/cgi-bin/type?keys=' + typed);
             typed = [];
+            altHold = false;
+            ctrlHold = false;
+            shiftHold = false;
+            udapteHold();
           }
         });
+
+        function UpdateHold () {
+          if (altHold) {
+            $("#alt-hold-indicator").addClass("on");
+            $("#alt-hold-indicator").removeClass("off");
+          } else {
+            $("#alt-hold-indicator").removeClass("on");
+            $("#alt-hold-indicator").addClass("off");
+          }
+          if (ctrlHold) {
+            $("#ctrl-hold-indicator").addClass("on");
+            $("#ctrl-hold-indicator").removeClass("off");
+          } else {
+            $("#ctrl-hold-indicator").removeClass("on");
+            $("#ctrl-hold-indicator").addClass("off");
+          }
+          if (shiftHold) {
+            $("#shift-hold-indicator").addClass("on");
+            $("#shift-hold-indicator").removeClass("off");
+          } else {
+            $("#shift-hold-indicator").removeClass("on");
+            $("#shift-hold-indicator").addClass("off");
+          }
+        }
 
         var bx=0;
         var by=0;
