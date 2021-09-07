@@ -136,6 +136,7 @@
         $("#mouse-hold-indicator").click(function(e) {
           e.preventDefault();
           mouseHold = !mouseHold;
+          console.log("mouseHold", mouseHold)
           if (mouseHold) {
             $("#mouse-hold-indicator").addClass("on");
             $("#mouse-hold-indicator").removeClass("off");
@@ -188,6 +189,9 @@
         });
 
         function udapteHold () {
+          console.log("altHold", altHold)
+          console.log("ctrlHold", ctrlHold)
+          console.log("shiftHold", shiftHold)
           if (altHold) {
             $("#alt-hold-indicator").addClass("on");
             $("#alt-hold-indicator").removeClass("off");
@@ -257,6 +261,8 @@
         function sendMove(x, y) {
           if (x != 0 && y != 0)
             callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: mouseHold ? 1 : 0, x: parseInt(x), y: parseInt(y) }));
+
+            console.log("mouseHold", mouseHold)
         }
 
         $("#b1").click(function(e) {
