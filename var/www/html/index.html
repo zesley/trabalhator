@@ -1,5 +1,4 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -130,11 +129,7 @@
         $("#mouse-hold-indicator").click(function(e) {
           e.preventDefault();
           mouseHold = !mouseHold;
-          if (mouseHold) {
-            $("#mouse-hold-indicator").addClass("on");
-          } else {
-            $("#mouse-hold-indicator").removeClass("on");
-          }
+          udapteHold();
         });
 
         var mouseHold = false;
@@ -195,6 +190,11 @@
           } else {
             $("#shift-hold-indicator").removeClass("on");
           }
+          if (mouseHold) {
+            $("#mouse-hold-indicator").addClass("on");
+          } else {
+            $("#mouse-hold-indicator").removeClass("on");
+          }
         }
 
         function removeTyped (item) {
@@ -247,6 +247,10 @@
 
         $("#b1").click(function(e) {
           e.preventDefault();
+          if (mouseHold) {
+            mouseHold = false;
+            udapteHold();
+          }
           callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 1, x: 0, y: 0 }));
         });
 
@@ -650,15 +654,15 @@
             <div class="small-space"></div>
             <div class="key-space">
               <div>N</div>
-              <div id="num-indicator" class="avua off"></div>
+              <div id="num-indicator" class="avua"></div>
             </div>
             <div class="key-space">
               <div>C</div>
-              <div id="caps-indicator" class="avua off"></div>
+              <div id="caps-indicator" class="avua"></div>
             </div>
             <div class="key-space">
               <div>S</div>
-              <div id="scroll-indicator" class="avua off"></div>
+              <div id="scroll-indicator" class="avua"></div>
             </div>
             <div class="key-space">
             </div>
@@ -841,7 +845,7 @@
         <div class="keyboard__row">
             <div class="key--bottom key--word key--w7 key" data-key="-leftshift">
               <div class="key--bottom-left">Shift</div>
-              <div class="avua off" id="shift-hold-indicator"></div>
+              <div class="avua" id="shift-hold-indicator"></div>
             </div>
             <div class="key--letter key" data-key="-z">Z</div>
             <div class="key--letter key" data-key="-x">X</div>
@@ -863,7 +867,7 @@
             <div>/</div>
             </div>
             <div class="key--bottom key--word key--w7 key" data-key="-rightshift">
-              <div class="avua off" id="shift-hold-indicator"></div>
+              <div class="avua" id="shift-hold-indicator"></div>
               <div class="key--bottom-left">Shift</div>
             </div>
             <div class="small-space"></div>
@@ -889,7 +893,7 @@
         </div>
         <div class="keyboard__row">
             <div class="key--bottom key--word key--w4 key" data-key="-leftctrl">
-              <div class="avua off" id="ctrl-hold-indicator"></div>
+              <div class="avua" id="ctrl-hold-indicator"></div>
               <div class="key--bottom-left">Ctrl</div>
             </div>
             <div class="key--bottom key--bottom-leftkey--word key" data-key="-leftmeta">
@@ -905,14 +909,14 @@
                 </div>
             </div>
             <div class="key--bottom key--word key--w3 key" data-key="-leftalt">
-              <div class="avua off" id="alt-hold-indicator"></div>
+              <div class="avua" id="alt-hold-indicator"></div>
               <div class="key--bottom-left">Alt</div>
             </div>
             <div class="key--double key--right key--space key" data-key="-spacebar">
             &nbsp;
             </div>
             <div class="key--bottom key--word key--w3 key" data-key="-rightalt">
-              <div class="avua off" id="alt-hold-indicator"></div>
+              <div class="avua" id="alt-hold-indicator"></div>
               <div class="key--bottom-left">Alt</div>
             </div>
             <div class="key--bottom key--word key--w1 key" data-key="-app">
@@ -923,7 +927,7 @@
               </div>
             </div>
             <div class="key--bottom key--word key--w4 key" data-key="-rightctrl">
-              <div class="avua off" id="ctrl-hold-indicator"></div>
+              <div class="avua" id="ctrl-hold-indicator"></div>
               <div class="key--bottom-left">Ctrl</div>
             </div>
             <div class="small-space"></div>
@@ -958,7 +962,7 @@
         <div style="width: 100%; height: 80%; background-color: lightgray;" id="touchpad"></div>
         <div style="width: 100%; height: 20%; display: flex;">
           <div class="mouse-button" id="b1">
-            <div class="avua-mouse off" id="mouse-hold-indicator"></div></div>
+            <div class="avua-mouse" id="mouse-hold-indicator"></div></div>
           <hr>
           <div class="mouse-button-small" id="b3"></div>
           <hr>
