@@ -152,17 +152,17 @@
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
             if (!shiftHold)
-              removeTyped("shift");
+              removeTyped(key);
             udapteHold();
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
             if (!ctrlHold)
-              removeTyped("ctrl");
+              removeTyped(key);
             udapteHold();
           } else if (key.includes("alt")) {
             altHold = !altHold;
             if (!altHold)
-              removeTyped("alt");
+              removeTyped(key);
             udapteHold();
           } else {
             altHold = false;
