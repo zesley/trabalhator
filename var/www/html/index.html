@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js" type="application/javascript"></script>
-    <title>Trabalhator 3.0</title>
+    <title>Trabalhator 3.5</title>
     <script type="application/javascript">
       $(document).ready(function() {
         var mouse = null;
@@ -142,37 +142,43 @@
         $('.key').on('click', function(e) {
           var key = null;
           var el = $(event.target);
-          while (!el.hasClass("key")) {
+          while (!el.hasClass("key"))
             el = el.parent();
-          }
 
           key = el.attr('data-key');
-          typed.push(key);
           
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
             if (!shiftHold)
-              removeTyped(key);
-            udapteHold();
+              sendType();
+            else
+              typed.push(key);
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
             if (!ctrlHold)
-              removeTyped(key);
-            udapteHold();
+              sendType();
+            else
+              typed.push(key);
           } else if (key.includes("alt")) {
             altHold = !altHold;
             if (!altHold)
-              removeTyped(key);
-            udapteHold();
+              sendType();
+            else
+              typed.push(key);
           } else {
-            altHold = false;
-            ctrlHold = false;
-            shiftHold = false;
-            udapteHold();
-            callAjax('/cgi-bin/type?keys=' + typed);
-            typed = [];
+            typed.push(key);
+            sendType ();
           }
         });
+
+        function sendType () {
+          callAjax('/cgi-bin/type?keys=' + typed);
+          typed = [];
+          altHold = false;
+          ctrlHold = false;
+          shiftHold = false;
+          udapteHold();
+        }
 
         function udapteHold () {
           if (altHold) {
@@ -202,11 +208,7 @@
             $("#mouse-hold-indicator").removeClass("on");
           }
         }
-
-        function removeTyped (item) {
-          typed = typed.filter(i => i !== item);
-        }
-
+        
         var bx=0;
         var by=0;
         var ex=0;
