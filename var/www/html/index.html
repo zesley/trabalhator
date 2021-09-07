@@ -152,7 +152,7 @@
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
             if (!shiftHold)
-              typed.push("shift");
+              removeTyped("shift");
             udapteHold();
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
