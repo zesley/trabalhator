@@ -149,22 +149,28 @@
           
           if (key.includes("shift")) {
             shiftHold = !shiftHold;
-            if (!shiftHold)
+            if (!shiftHold) {
               sendType();
-            else
+            } else {
               typed.push(key);
+              udapteHold();
+            }
           } else if (key.includes("ctrl")) {
             ctrlHold = !ctrlHold;
-            if (!ctrlHold)
+            if (!ctrlHold) {
               sendType();
-            else
+            } else {
               typed.push(key);
+              udapteHold();
+            } 
           } else if (key.includes("alt")) {
             altHold = !altHold;
-            if (!altHold)
+            if (!altHold) {
               sendType();
-            else
+            } else {
               typed.push(key);
+              udapteHold();
+            } 
           } else {
             typed.push(key);
             sendType ();
@@ -208,7 +214,7 @@
             $("#mouse-hold-indicator").removeClass("on");
           }
         }
-        
+
         var bx=0;
         var by=0;
         var ex=0;
