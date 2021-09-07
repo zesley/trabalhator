@@ -176,19 +176,25 @@
 
         function udapteHold () {
           if (altHold) {
-            $("#alt-hold-indicator").addClass("on");
+            $("#alt-r-hold-indicator").addClass("on");
+            $("#alt-l-hold-indicator").addClass("on");
           } else {
-            $("#alt-hold-indicator").removeClass("on");
+            $("#alt-r-hold-indicator").removeClass("on");
+            $("#alt-l-hold-indicator").removeClass("on");
           }
           if (ctrlHold) {
-            $("#ctrl-hold-indicator").addClass("on");
+            $("#ctrl-r-hold-indicator").addClass("on");
+            $("#ctrl-l-hold-indicator").addClass("on");
           } else {
-            $("#ctrl-hold-indicator").removeClass("on");
+            $("#ctrl-r-hold-indicator").removeClass("on");
+            $("#ctrl-l-hold-indicator").removeClass("on");
           }
           if (shiftHold) {
-            $("#shift-hold-indicator").addClass("on");
+            $("#shift-r-hold-indicator").addClass("on");
+            $("#shift-l-hold-indicator").addClass("on");
           } else {
-            $("#shift-hold-indicator").removeClass("on");
+            $("#shift-r-hold-indicator").removeClass("on");
+            $("#shift-l-hold-indicator").removeClass("on");
           }
           if (mouseHold) {
             $("#mouse-hold-indicator").addClass("on");
@@ -845,7 +851,7 @@
         <div class="keyboard__row">
             <div class="key--bottom key--word key--w7 key" data-key="-leftshift">
               <div class="key--bottom-left">Shift</div>
-              <div class="avua" id="shift-hold-indicator"></div>
+              <div class="avua" id="shift-r-hold-indicator"></div>
             </div>
             <div class="key--letter key" data-key="-z">Z</div>
             <div class="key--letter key" data-key="-x">X</div>
@@ -867,7 +873,7 @@
             <div>/</div>
             </div>
             <div class="key--bottom key--word key--w7 key" data-key="-rightshift">
-              <div class="avua" id="shift-hold-indicator"></div>
+              <div class="avua" id="shift-l-hold-indicator"></div>
               <div class="key--bottom-left">Shift</div>
             </div>
             <div class="small-space"></div>
@@ -893,7 +899,7 @@
         </div>
         <div class="keyboard__row">
             <div class="key--bottom key--word key--w4 key" data-key="-leftctrl">
-              <div class="avua" id="ctrl-hold-indicator"></div>
+              <div class="avua" id="ctrl-r-hold-indicator"></div>
               <div class="key--bottom-left">Ctrl</div>
             </div>
             <div class="key--bottom key--bottom-leftkey--word key" data-key="-leftmeta">
@@ -909,14 +915,14 @@
                 </div>
             </div>
             <div class="key--bottom key--word key--w3 key" data-key="-leftalt">
-              <div class="avua" id="alt-hold-indicator"></div>
+              <div class="avua" id="alt-r-hold-indicator"></div>
               <div class="key--bottom-left">Alt</div>
             </div>
             <div class="key--double key--right key--space key" data-key="-spacebar">
             &nbsp;
             </div>
             <div class="key--bottom key--word key--w3 key" data-key="-rightalt">
-              <div class="avua" id="alt-hold-indicator"></div>
+              <div class="avua" id="alt-l-hold-indicator"></div>
               <div class="key--bottom-left">Alt</div>
             </div>
             <div class="key--bottom key--word key--w1 key" data-key="-app">
@@ -927,7 +933,7 @@
               </div>
             </div>
             <div class="key--bottom key--word key--w4 key" data-key="-rightctrl">
-              <div class="avua" id="ctrl-hold-indicator"></div>
+              <div class="avua" id="ctrl-l-hold-indicator"></div>
               <div class="key--bottom-left">Ctrl</div>
             </div>
             <div class="small-space"></div>
