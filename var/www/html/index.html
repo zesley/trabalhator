@@ -172,12 +172,12 @@
             altHold = !altHold;
             udapteHold();
           } else {
-            callAjax('/cgi-bin/type?keys=' + typed);
-            typed = [];
             altHold = false;
             ctrlHold = false;
             shiftHold = false;
             udapteHold();
+            callAjax('/cgi-bin/type?keys=' + typed);
+            typed = [];
           }
         });
 
