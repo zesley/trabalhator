@@ -60,24 +60,18 @@
                 content += "<div style='width: 60px;' class='overflow'>" + result.type.exec + "</div>";
                 if (result.type.report.n === "1") {
                   $("#num-indicator").addClass("on");
-                  $("#num-indicator").removeClass("off");
                 } else {
                   $("#num-indicator").removeClass("on");
-                  $("#num-indicator").addClass("off");
                 }
                 if (result.type.report.c === "1") {
                   $("#caps-indicator").addClass("on");
-                  $("#caps-indicator").removeClass("off");
                 } else {
                   $("#caps-indicator").removeClass("on");
-                  $("#caps-indicator").addClass("off");
                 }
                 if(result.type.report.s === "1") {
                   $("#scroll-indicator").addClass("on");
-                  $("#scroll-indicator").removeClass("off");
                 } else {
                   $("#scroll-indicator").removeClass("on");
-                  $("#scroll-indicator").addClass("off");
                 }
                 var t = result.type.keys.replaceAll("left", "").replaceAll("right", "").replaceAll("kp", "").replaceAll("-", "");
                 content += "<div style='width: calc(100% - 300px);'>Keys: " + t + "</div>";
@@ -138,10 +132,8 @@
           mouseHold = !mouseHold;
           if (mouseHold) {
             $("#mouse-hold-indicator").addClass("on");
-            $("#mouse-hold-indicator").removeClass("off");
           } else {
             $("#mouse-hold-indicator").removeClass("on");
-            $("#mouse-hold-indicator").addClass("off");
           }
         });
 
@@ -190,24 +182,18 @@
         function udapteHold () {
           if (altHold) {
             $("#alt-hold-indicator").addClass("on");
-            $("#alt-hold-indicator").removeClass("off");
           } else {
             $("#alt-hold-indicator").removeClass("on");
-            $("#alt-hold-indicator").addClass("off");
           }
           if (ctrlHold) {
             $("#ctrl-hold-indicator").addClass("on");
-            $("#ctrl-hold-indicator").removeClass("off");
           } else {
             $("#ctrl-hold-indicator").removeClass("on");
-            $("#ctrl-hold-indicator").addClass("off");
           }
           if (shiftHold) {
             $("#shift-hold-indicator").addClass("on");
-            $("#shift-hold-indicator").removeClass("off");
           } else {
             $("#shift-hold-indicator").removeClass("on");
-            $("#shift-hold-indicator").addClass("off");
           }
         }
 
@@ -512,14 +498,12 @@
         box-shadow: 0 0 15px #ccc;
         overflow: hidden;
         border: 1px solid black;
-        margin: 15px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%,0);
+        margin: 10px;
       }
 
       .mouse-button {
         cursor: pointer;
+        position: relative;
         width: 45%; 
         height: 100%; 
         background-color: grey;
@@ -541,32 +525,30 @@
         background-color: green;
       }
 
-      .off {
-        background-color: red;
-      }
-
       .avua {
         position: absolute;
         top: 3px !important;
         right: 3px !important;
-        height: 4px !important;
-        width: 4px !important;
-        border-radius: 5px !important;
+        height: 3px !important;
+        width: 3px !important;
+        border-radius: 100px !important;
         padding: 0 !important;
         margin: 0 !important;
         box-shadow: none !important;
+        border: 1px solid black;
       }
 
       .avua-mouse {
         position: absolute;
-        top: 10px !important;
-        right: 10px !important;
+        top: 5px !important;
+        right: 5px !important;
         height: 10px !important;
         width: 10px !important;
         border-radius: 100px !important;
         padding: 0 !important;
         margin: 0 !important;
         cursor: pointer;
+        border: 1px solid black;
       }
     </style> 
   </head>
@@ -599,7 +581,6 @@
           </div>
         </div>
         <div>
-          <h4>LOG</h4>
           <div class="result overflow">
             <div class="flex" style='background-color: lightgray; padding: 3px; font-weight: bold;'>
               <div style='width: 160px'>Time</div>
@@ -971,12 +952,12 @@
       </div>
     </div>
 
-    <div class="hiden" id="div-mouse">
+    <div class="hiden flex center" id="div-mouse">
       <div class="mousearea">
-        <div class="avua-mouse off" id="mouse-hold-indicator"></div>
         <div style="width: 100%; height: 80%; background-color: lightgray;" id="touchpad"></div>
         <div style="width: 100%; height: 20%; display: flex;">
-          <div class="mouse-button" id="b1"></div>
+          <div class="mouse-button" id="b1">
+            <div class="avua-mouse off" id="mouse-hold-indicator"></div></div>
           <hr>
           <div class="mouse-button-small" id="b3"></div>
           <hr>
