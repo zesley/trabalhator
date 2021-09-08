@@ -90,8 +90,8 @@
             }
             if (content !== "") {
               var list = $("#result").children(); 
-              if (list.size > 20) {
-                list.removeChild(list[list.size - 1]);  
+              if (list.length > 20) {
+                list.removeChild(list[list.length - 1]);  
               }
               $("#result").prepend(content);
             }
