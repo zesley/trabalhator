@@ -15,6 +15,8 @@
         var shiftHold = false;
         var altHold = false;
         var metaHold = false;
+        var mouseEnabled = false;
+        var keyboardEnabled = false;
         var typed = [];
         var bx=0;
         var by=0;
@@ -34,6 +36,7 @@
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
               if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.exec != "undefined") {
+                keyboardEnabled = true;
                 keyboard = string_keyboard;
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px;'>" + time + "</div>";
@@ -42,11 +45,15 @@
                 content += "<div style='width: 75px;'>Size: " + result.keyboard.size + "</div>";
                 content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
                 content += "</div>";
+              } else {
+                keyboardEnabled = false;
               }
+              $("#keyboard-auto").removeClass("disabled");
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
               if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.exec != "undefined") {
+                mouseEnabled = true;
                 mouse = string_mouse; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
@@ -55,7 +62,10 @@
                 content += "<div style='width: 75px;'>X: " + result.mouse.x + "</div>";
                 content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
 		            content += "</div>";
+              } else {
+                mouseEnabled = false;
               }
+              $("#mouse-auto").removeClass("disabled");
             }
             if (typeof result.type != "undefined") {
               var string_type = JSON.stringify(result.type);
@@ -105,22 +115,29 @@
                 list[list.length - 1].remove();
               $("#result").prepend(content);
             }
+            updateEnabled();
           }});
         }
         setInterval(function(){
           callAjax("/cgi-bin/status");
         }, 1000);
-        $("#kstart").click(function() {
-          callAjax("/cgi-bin/kstart");
+        $("#keyboard-auto").click(function() {
+          if (!$("#keyboard-auto").hasClass("disabled")) {
+            if ($("#keyboard-auto-indicator").hasClass("on"))
+              callAjax("/cgi-bin/kstop");
+            else
+              callAjax("/cgi-bin/kstart");
+            updateEnabled();
+          }
         });
-        $("#kstop").click(function() {
-          callAjax("/cgi-bin/kstop");
-        });
-        $("#mstart").click(function() {
-          callAjax("/cgi-bin/mstart");
-        });
-        $("#mstop").click(function() {
-          callAjax("/cgi-bin/mstop");
+        $("#mouse-auto").click(function() {
+          if (!$("#mouse-auto").hasClass("disabled")) {
+            if ($("#mouse-auto-indicator").hasClass("on"))
+              callAjax("/cgi-bin/mstop");
+            else
+              callAjax("/cgi-bin/mstart");
+            updateEnabled();
+          }
         });
 
         $("#showkeyboard").click(function() {
@@ -230,6 +247,18 @@
             $("#meta-hold-indicator").removeClass("on");
           }
         }
+        function updateEnabled () {
+          if (mouseEnabled) {
+            $("#keyboard-indicator").addClass("on");
+          } else {
+            $("#keyboard-indicator").removeClass("on");
+          }
+          if (mouseEnabled) {
+            $("#mouse-indicator").addClass("on");
+          } else {
+            $("#mouse-indicator").removeClass("on");
+          }
+        }
 
         $("#touchpad").on("mousedown",function(e) {
           e.preventDefault();
@@ -314,6 +343,7 @@
         text-align: center;
       }
       .button {
+        position: relative;
         border: 1px;
         width: 100px;
         height: 30px;
@@ -330,6 +360,11 @@
         font-weight: bold;
       }
       .button:hover {
+	      color: black;
+        background-color: grey;
+      }
+      .disabled {
+        cursor: default;
 	      color: black;
         background-color: grey;
       }
@@ -582,17 +617,21 @@
   <body>
 	      <div class="flex between">
           <div class="flex">
-            <div id="kstart" class="button flex center">Start</div>
             <div id="showkeyboard" class="button flex center">Keyboard</div>
-            <div id="kstop" class="button flex center">Stop</div>
+            <div id="keyboard-auto" class="button flex center disabled">
+              <div id="keyboard-auto-indicator" class="avua"></div>
+              <div>Auto</div>
+            </div>
           </div>
           <div class="flex center">
             <h2>Remote Keyboard</h2>
           </div>
           <div class="flex">
-            <div id="mstart" class="button flex center">Start</div>
             <div id="showmouse" class="button flex center">Mouse</div>
-            <div id="mstop" class="button flex center">Stop</div>
+            <div id="mouse-auto" class="button flex center disabled">
+              <div id="mouse-auto-indicator" class="avua"></div>
+              <div>Auto</div>
+            </div>
           </div>
         </div>
         <div>
