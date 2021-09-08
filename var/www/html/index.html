@@ -124,7 +124,8 @@
 
         $("#showkeyboard").click(function() {
           $("#div-keyboard").toggleClass("hiden");
-          size();
+          if($("#div-keyboard").is(":visible"))
+            size();
         });
 
         $("#showmouse").click(function() {
