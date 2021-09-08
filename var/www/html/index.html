@@ -118,7 +118,8 @@
         setInterval(function(){
           callAjax("/cgi-bin/status");
         }, 1000);
-        $("#keyboard-auto").click(function() {
+        $("#keyboard-auto").click(function(e) {
+          e.preventDefault();
           if (!$("#keyboard-auto").hasClass("disabled")) {
             if ($("#keyboard-auto-indicator").hasClass("on"))
               callAjax("/cgi-bin/kstop");
@@ -126,7 +127,8 @@
               callAjax("/cgi-bin/kstart");
           }
         });
-        $("#mouse-auto").click(function() {
+        $("#mouse-auto").click(function(e) {
+          e.preventDefault();
           if (!$("#mouse-auto").hasClass("disabled")) {
             if ($("#mouse-auto-indicator").hasClass("on"))
               callAjax("/cgi-bin/mstop");
@@ -135,13 +137,15 @@
           }
         });
 
-        $("#showkeyboard").click(function() {
+        $("#showkeyboard").click(function(e) {
+          e.preventDefault();
           $("#div-keyboard").toggleClass("hiden");
           if($("#div-keyboard").is(":visible"))
             size();
         });
 
-        $("#showmouse").click(function() {
+        $("#showmouse").click(function(e) {
+          e.preventDefault();
           $("#div-mouse").toggleClass("hiden");
         });
 
