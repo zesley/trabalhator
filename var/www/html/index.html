@@ -15,8 +15,6 @@
         var shiftHold = false;
         var altHold = false;
         var metaHold = false;
-        var mouseEnabled = false;
-        var keyboardEnabled = false;
         var typed = [];
         var bx=0;
         var by=0;
@@ -36,7 +34,7 @@
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
               if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.exec != "undefined") {
-                keyboardEnabled = true;
+                $("#keyboard-auto-indicator").addClass("on");
                 keyboard = string_keyboard;
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px;'>" + time + "</div>";
@@ -46,14 +44,14 @@
                 content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
                 content += "</div>";
               } else {
-                keyboardEnabled = false;
+                $("#keyboard-auto-indicator").removeClass("on");
               }
               $("#keyboard-auto").removeClass("disabled");
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
               if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.exec != "undefined") {
-                mouseEnabled = true;
+                $("#mouse-auto-indicator").addClass("on");
                 mouse = string_mouse; 
                 content += "<div style='height: 15px; padding: 2px;' class='flex'>";
                 content += "<div style='width: 160px'>" + time + "</div>";
@@ -63,7 +61,7 @@
                 content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
 		            content += "</div>";
               } else {
-                mouseEnabled = false;
+                $("#mouse-auto-indicator").removeClass("on");
               }
               $("#mouse-auto").removeClass("disabled");
             }
@@ -114,16 +112,6 @@
               if (list.length > 14)
                 list[list.length - 1].remove();
               $("#result").prepend(content);
-            }
-            if (keyboardEnabled) {
-              $("#keyboard-auto-indicator").addClass("on");
-            } else {
-              $("#keyboard-auto-indicator").removeClass("on");
-            }
-            if (mouseEnabled) {
-              $("#mouse-auto-indicator").addClass("on");
-            } else {
-              $("#mouse-auto-indicator").removeClass("on");
             }
           }});
         }
