@@ -20,4 +20,3 @@ echo ' "keyboard": { "status": "'$ks'" '$keyboard' },'
 echo ' "mouse": { "status": "'$ms'" '$mouse' }'
 echo '}'
 echo ''
-d
