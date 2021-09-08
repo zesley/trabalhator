@@ -14,9 +14,12 @@
         var ctrlHold = false;
         var shiftHold = false;
         var altHold = false;
-
         var typed = [];
-        
+        var bx=0;
+        var by=0;
+        var ex=0;
+        var ey=0;
+
         function callAjax(url) {
           $.ajax({ url: url, success: function( result ) {
             var t = new Date();
@@ -131,6 +134,7 @@
           e.preventDefault();
           mouseHold = !mouseHold;
           udapteHold();
+          callAjax('/cgi-bin/move?coords=' + JSON.stringify({ b: 1, x: 0, y: 0 }));
         });
 
         $('.key').on('click', function(e) {
@@ -208,11 +212,6 @@
             $("#mouse-hold-indicator").removeClass("on");
           }
         }
-
-        var bx=0;
-        var by=0;
-        var ex=0;
-        var ey=0;
 
         $("#touchpad").on("mousedown",function(e) {
           e.preventDefault();
