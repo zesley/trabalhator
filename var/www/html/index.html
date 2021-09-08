@@ -115,7 +115,16 @@
                 list[list.length - 1].remove();
               $("#result").prepend(content);
             }
-            updateEnabled();
+            if (mouseEnabled) {
+              $("#keyboard-auto-indicator").addClass("on");
+            } else {
+              $("#keyboard-auto-indicator").removeClass("on");
+            }
+            if (mouseEnabled) {
+              $("#mouse-auto-indicator").addClass("on");
+            } else {
+              $("#mouse-auto-indicator").removeClass("on");
+            }
           }});
         }
         setInterval(function(){
@@ -127,7 +136,6 @@
               callAjax("/cgi-bin/kstop");
             else
               callAjax("/cgi-bin/kstart");
-            updateEnabled();
           }
         });
         $("#mouse-auto").click(function() {
@@ -136,7 +144,6 @@
               callAjax("/cgi-bin/mstop");
             else
               callAjax("/cgi-bin/mstart");
-            updateEnabled();
           }
         });
 
@@ -245,18 +252,6 @@
             $("#meta-hold-indicator").addClass("on");
           } else {
             $("#meta-hold-indicator").removeClass("on");
-          }
-        }
-        function updateEnabled () {
-          if (mouseEnabled) {
-            $("#keyboard-auto-indicator").addClass("on");
-          } else {
-            $("#keyboard-auto-indicator").removeClass("on");
-          }
-          if (mouseEnabled) {
-            $("#mouse-auto-indicator").addClass("on");
-          } else {
-            $("#mouse-auto-indicator").removeClass("on");
           }
         }
 
