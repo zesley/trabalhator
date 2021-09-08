@@ -90,9 +90,8 @@
             }
             if (content !== "") {
               var list = $("#result").children(); 
-              if (list.length > 20) {
-                list.remove(list[list.length - 1]);  
-              }
+              if (list.length > 20)
+                $("#result").remove(list[list.length - 1]);  
               $("#result").prepend(content);
             }
           }});
