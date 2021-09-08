@@ -124,6 +124,7 @@
 
         $("#showkeyboard").click(function() {
           $("#div-keyboard").toggleClass("hiden");
+          size();
         });
 
         $("#showmouse").click(function() {
@@ -276,12 +277,6 @@
           var size = $("#div-keyboard").width() / 80;
           keyboard.style.fontSize = size + 'px';
         }
-
-        var keyboard = document.querySelector('.keyboard');
-        window.addEventListener('resize', function (e) {
-          size();
-        });
-        size();
       });
     </script>
     <style>
