@@ -91,7 +91,7 @@
             if (content !== "") {
               var list = $("#result").children(); 
               if (list.length > 20) {
-                list.removeChild(list[list.length - 1]);  
+                list.remove(list[list.length - 1]);  
               }
               $("#result").prepend(content);
             }
