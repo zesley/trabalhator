@@ -34,7 +34,7 @@
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
               if (result.keyboard.status === "active"){
-                $("#keyboard-auto-indicator").addClass("on");
+                $("#keyboard-auto").addClass("active");
                 if (string_keyboard !== keyboard && typeof result.keyboard.exec != "undefined") {
                   keyboard = string_keyboard;
                   content += "<div style='height: 15px; padding: 2px;' class='flex'>";
@@ -46,14 +46,14 @@
                   content += "</div>";
                 }
               } else {
-                $("#keyboard-auto-indicator").removeClass("on");
+                $("#keyboard-auto").removeClass("active");
               }
               $("#keyboard-auto").removeClass("disabled");
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
               if (result.mouse.status === "active") {
-                $("#mouse-auto-indicator").addClass("on");
+                $("#mouse-auto").addClass("active");
                 if (string_mouse !== mouse && typeof result.mouse.exec != "undefined") {
                   mouse = string_mouse; 
                   content += "<div style='height: 15px; padding: 2px;' class='flex'>";
@@ -65,7 +65,7 @@
                   content += "</div>";
                 }
               } else {
-                $("#mouse-auto-indicator").removeClass("on");
+                $("#mouse-auto").removeClass("active");
               }
               $("#mouse-auto").removeClass("disabled");
             }
@@ -125,7 +125,7 @@
         $("#keyboard-auto").click(function(e) {
           e.preventDefault();
           if (!$("#keyboard-auto").hasClass("disabled")) {
-            if ($("#keyboard-auto-indicator").hasClass("on"))
+            if ($("#keyboard-auto").hasClass("active"))
               callAjax("/cgi-bin/kstop");
             else
               callAjax("/cgi-bin/kstart");
@@ -134,7 +134,7 @@
         $("#mouse-auto").click(function(e) {
           e.preventDefault();
           if (!$("#mouse-auto").hasClass("disabled")) {
-            if ($("#mouse-auto-indicator").hasClass("on"))
+            if ($("#mouse-auto").hasClass("active"))
               callAjax("/cgi-bin/mstop");
             else
               callAjax("/cgi-bin/mstart");
@@ -144,6 +144,7 @@
         $("#showkeyboard").click(function(e) {
           e.preventDefault();
           $("#div-keyboard").toggleClass("hiden");
+          $("#showkeyboard").toggleClass("active");
           if($("#div-keyboard").is(":visible"))
             size();
         });
@@ -151,6 +152,7 @@
         $("#showmouse").click(function(e) {
           e.preventDefault();
           $("#div-mouse").toggleClass("hiden");
+          $("#showmouse").toggleClass("active");
         });
 
         $("#mouse-hold-indicator").click(function(e) {
@@ -333,32 +335,82 @@
       h4 {
         text-align: center;
       }
+
       .button {
-        position: relative;
-        border: 1px;
-        width: 100px;
-        height: 30px;
-        padding: 5px;
         margin: 5px;
+        position: relative;
+        width: 100px;
+        height: 20px;
+        padding: 15px 25px;
+        font-size: 24px;
         text-align: center;
         cursor: pointer;
-        color: grey;
-        background-color: black;
-        border-radius: 5px;
-        -moz-box-shadow: 0 0 15px #ccc;
-        -webkit-box-shadow: 0 0 15px #ccc;
-        box-shadow: 0 0 15px #ccc;
-        font-weight: bold;
+        outline: none;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
       }
-      .button:hover {
-	      color: black;
-        background-color: grey;
+
+      .active {
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
       }
+
+      .button.sm {
+        background-color: #04AA6D;
+      }
+
+      .button.sm:hover {
+        background-color: #3e8e41;
+      }
+
+      .button.sm.active {
+        background-color: #3e8e41;
+      }
+
+      .button.sk {
+        background-color: #1a889b;
+      }
+
+      .button.sk:hover {
+        background-color: #115966;
+      }
+
+      .button.sk.active {
+        background-color: #115966;
+      }
+
+      .button.am {
+        background-color: #04aa49;
+      }
+
+      .button.am:hover {
+        background-color: #4e8e3e;
+      }
+
+      .button.am.active {
+        background-color: #4e8e3e;
+      }
+
+      .button.ak {
+        background-color: #1a979b;
+      }
+
+      .button.ak:hover {
+        background-color: #116662;
+      }
+
+      .button.ak.active {
+        background-color: #116662;
+      }
+
       .disabled {
         cursor: default;
-	      color: black;
-        background-color: grey;
+        box-shadow: 0 9px #999;
+        background-color: grey !important;
       }
+
       .result {
         padding: 5px;
         margin: 5px;
@@ -608,9 +660,8 @@
   <body>
 	      <div class="flex between">
           <div class="flex">
-            <div id="showkeyboard" class="button flex center">Keyboard</div>
-            <div id="keyboard-auto" class="button flex center disabled">
-              <div id="keyboard-auto-indicator" class="avua"></div>
+            <div id="showkeyboard" class="button sk flex center">Keyboard</div>
+            <div id="keyboard-auto" class="button ak flex center disabled">
               <div>Auto</div>
             </div>
           </div>
@@ -618,9 +669,8 @@
             <h2>Remote Keyboard</h2>
           </div>
           <div class="flex">
-            <div id="showmouse" class="button flex center">Mouse</div>
-            <div id="mouse-auto" class="button flex center disabled">
-              <div id="mouse-auto-indicator" class="avua"></div>
+            <div id="showmouse" class="button sm flex center">Mouse</div>
+            <div id="mouse-auto" class="button am flex center disabled">
               <div>Auto</div>
             </div>
           </div>
