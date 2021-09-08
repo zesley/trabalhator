@@ -14,6 +14,7 @@
         var ctrlHold = false;
         var shiftHold = false;
         var altHold = false;
+        var metaHold = false;
         var typed = [];
         var bx=0;
         var by=0;
@@ -171,7 +172,15 @@
             } else {
               typed.push(key);
               udapteHold();
-            } 
+            }
+          } else if (key.includes("-leftmeta")) {
+            metaHold = !metaHold;
+            if (!metaHold) {
+              sendType();
+            } else {
+              typed.push(key);
+              udapteHold();
+            }
           } else {
             typed.push(key);
             sendType ();
@@ -213,6 +222,11 @@
             $("#mouse-hold-indicator").addClass("on");
           } else {
             $("#mouse-hold-indicator").removeClass("on");
+          }
+          if (metaHold) {
+            $("#meta-hold-indicator").addClass("on");
+          } else {
+            $("#meta-hold-indicator").removeClass("on");
           }
         }
 
@@ -889,16 +903,17 @@
               <div class="key-bottom-left">Ctrl</div>
             </div>
             <div class="key-bottom key-bottom-leftkey-word key" data-key="-leftmeta">
-                <div class="key-bottom-left">
-                    <div style="display: flex;">
-                        <div class="square">&nbsp;</div>
-                        <div class="square">&nbsp;</div>
-                    </div>
-                    <div style="display: flex;">
-                        <div class="square">&nbsp;</div>
-                        <div class="square">&nbsp;</div>
-                    </div>
-                </div>
+              <div class="avua" id="meta-hold-indicator"></div>
+              <div class="key-bottom-left">
+                  <div style="display: flex;">
+                      <div class="square">&nbsp;</div>
+                      <div class="square">&nbsp;</div>
+                  </div>
+                  <div style="display: flex;">
+                      <div class="square">&nbsp;</div>
+                      <div class="square">&nbsp;</div>
+                  </div>
+              </div>
             </div>
             <div class="key-bottom key-word key-w3 key" data-key="-leftalt">
               <div class="avua" id="alt-r-hold-indicator"></div>
