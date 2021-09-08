@@ -94,9 +94,9 @@
               }
             }
             if (content !== "") {
-              if (log_count > 1000) {
-                $("#result").html("");
-                log_count = 0;
+              if (log_count > 20) {
+                var list = document.getElementById("result"); 
+                list.removeChild(list.childNodes[0]);  
               }
               $("#result").prepend(content);
             }
