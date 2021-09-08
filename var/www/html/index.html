@@ -96,7 +96,7 @@
             if (content !== "") {
               if (log_count > 20) {
                 var list = document.getElementById("result"); 
-                list.removeChild(list.childNodes[0]);  
+                list.removeChild(list.childNodes[list.size - 1]);  
               }
               $("#result").prepend(content);
             }
