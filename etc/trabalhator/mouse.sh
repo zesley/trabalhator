@@ -22,16 +22,16 @@ run() {
     x="x00"
     y="x00"
     if [ $cin == 0 ]; then
-      x="x02"
+      x="x03"
       cin=1
     elif [ $cin == 1 ]; then
-      y="x02"
+      y="x03"
       cin=2
     elif [ $cin == 2 ]; then
-      x="xfe"
+      x="xfd"
       cin=3
     elif [ $cin == 3 ]; then
-      y="xfe"
+      y="xfd"
       cin=0
     fi
 
