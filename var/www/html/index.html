@@ -10,6 +10,13 @@
         var keyboard = null;
         var type = null;
         var move = null;
+        var mouseHold = false;
+        var ctrlHold = false;
+        var shiftHold = false;
+        var altHold = false;
+
+        var typed = [];
+        
         function callAjax(url) {
           $.ajax({ url: url, success: function( result ) {
             var t = new Date();
@@ -125,13 +132,6 @@
           mouseHold = !mouseHold;
           udapteHold();
         });
-
-        var mouseHold = false;
-        var ctrlHold = false;
-        var shiftHold = false;
-        var altHold = false;
-
-        var typed = [];
 
         $('.key').on('click', function(e) {
           var key = null;
