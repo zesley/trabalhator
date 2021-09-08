@@ -33,16 +33,18 @@
             var content = "";
 	          if (typeof result.keyboard != "undefined") {
               var string_keyboard = JSON.stringify(result.keyboard);
-              if (string_keyboard !== keyboard && result.keyboard.status === "active" && typeof result.keyboard.exec != "undefined") {
+              if (result.keyboard.status === "active"){
                 $("#keyboard-auto-indicator").addClass("on");
-                keyboard = string_keyboard;
-                content += "<div style='height: 15px; padding: 2px;' class='flex'>";
-                content += "<div style='width: 160px;'>" + time + "</div>";
-                content += "<div style='width: 80px;'>Keyboard</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.keyboard.exec + "</div>";
-                content += "<div style='width: 75px;'>Size: " + result.keyboard.size + "</div>";
-                content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
-                content += "</div>";
+                if (string_keyboard !== keyboard && typeof result.keyboard.exec != "undefined") {
+                  keyboard = string_keyboard;
+                  content += "<div style='height: 15px; padding: 2px;' class='flex'>";
+                  content += "<div style='width: 160px;'>" + time + "</div>";
+                  content += "<div style='width: 80px;'>Keyboard</div>";
+                  content += "<div style='width: 60px;' class='overflow'>" + result.keyboard.exec + "</div>";
+                  content += "<div style='width: 75px;'>Size: " + result.keyboard.size + "</div>";
+                  content += "<div style='width: calc(100% - 375px);' class='text overflow'>Text: " + result.keyboard.text + "</div>";
+                  content += "</div>";
+                }
               } else {
                 $("#keyboard-auto-indicator").removeClass("on");
               }
@@ -50,16 +52,18 @@
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
-              if (string_mouse !== mouse && result.mouse.status === "active" && typeof result.mouse.exec != "undefined") {
+              if (result.mouse.status === "active") {
                 $("#mouse-auto-indicator").addClass("on");
-                mouse = string_mouse; 
-                content += "<div style='height: 15px; padding: 2px;' class='flex'>";
-                content += "<div style='width: 160px'>" + time + "</div>";
-                content += "<div style='width: 80px;'>Mouse</div>";
-                content += "<div style='width: 60px;' class='overflow'>" + result.mouse.exec + "</div>";
-                content += "<div style='width: 75px;'>X: " + result.mouse.x + "</div>";
-                content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
-		            content += "</div>";
+                if (string_mouse !== mouse && typeof result.mouse.exec != "undefined") {
+                  mouse = string_mouse; 
+                  content += "<div style='height: 15px; padding: 2px;' class='flex'>";
+                  content += "<div style='width: 160px'>" + time + "</div>";
+                  content += "<div style='width: 80px;'>Mouse</div>";
+                  content += "<div style='width: 60px;' class='overflow'>" + result.mouse.exec + "</div>";
+                  content += "<div style='width: 75px;'>X: " + result.mouse.x + "</div>";
+                  content += "<div style='width: 75px;'>Y: " + result.mouse.y + "</div>";
+                  content += "</div>";
+                }
               } else {
                 $("#mouse-auto-indicator").removeClass("on");
               }
