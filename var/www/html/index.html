@@ -113,7 +113,7 @@
             }
             if (content !== "") {
               var list = $("#result").children(); 
-              if (list.length > 14)
+              if (list.length > 5)
                 list[list.length - 1].remove();
               $("#result").prepend(content);
             }
@@ -417,14 +417,17 @@
         border: 1px solid black;
 	      border-radius: 5px;
         width: calc(100% - 20px);
-        height: 305px;
+        height: 100px;
       }
+
       .flex {
         display: flex;
       }
+      
       .between { 
         justify-content: space-between;
       }
+
       .center {
         justify-content: center;
         align-items: center;
@@ -658,33 +661,32 @@
     </style> 
   </head>
   <body>
-	      <div class="flex between">
-          <div class="flex">
-            <div id="showkeyboard" class="button sk flex center">Keyboard</div>
-            <div id="keyboard-auto" class="button ak flex center disabled">
-              <div>Auto</div>
-            </div>
-          </div>
-          <div class="flex center">
-            <h2>Remote Keyboard</h2>
-          </div>
-          <div class="flex">
-            <div id="showmouse" class="button sm flex center">Mouse</div>
-            <div id="mouse-auto" class="button am flex center disabled">
-              <div>Auto</div>
-            </div>
-          </div>
+    <div class="flex between">
+      <div class="flex">
+        <div id="showkeyboard" class="button sk flex center">Keyboard</div>
+        <div id="keyboard-auto" class="button ak flex center disabled">
+          <div>Auto</div>
         </div>
-        <div>
-          <div class="result overflow">
-            <div class="flex" style='background-color: lightgray; padding: 3px; font-weight: bold;'>
-              <div style='width: 160px'>Time</div>
-              <div style='width: 80px;'>App</div>
-              <div style='width: 60px;'>ms</div>
-              <div style='width: calc(100% - 375px);'></div>
-	    </div>
-	    <div id="result"></div>
       </div>
+      <div class="flex center">
+        <h2>Remote Keyboard</h2>
+      </div>
+      <div class="flex">
+        <div id="showmouse" class="button sm flex center">Mouse</div>
+        <div id="mouse-auto" class="button am flex center disabled">
+          <div>Auto</div>
+        </div>
+      </div>
+  </div>
+  <div class="result overflow">
+    <div class="flex" style='background-color: lightgray; padding: 3px; font-weight: bold;'>
+      <div style='width: 160px'>Time</div>
+      <div style='width: 80px;'>App</div>
+      <div style='width: 60px;'>ms</div>
+      <div style='width: calc(100% - 375px);'></div>
+    </div>
+    <div id="result"></div>
+  </div>
 
     <div class="hiden" id="div-keyboard">
       <div class="keyboard" >
