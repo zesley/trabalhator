@@ -48,7 +48,6 @@
               } else {
                 $("#keyboard-auto").removeClass("active");
               }
-              $("#keyboard-auto").removeClass("disabled");
             }
             if (typeof result.mouse != "undefined") {
               var string_mouse = JSON.stringify(result.mouse);
@@ -67,7 +66,6 @@
               } else {
                 $("#mouse-auto").removeClass("active");
               }
-              $("#mouse-auto").removeClass("disabled");
             }
             if (typeof result.type != "undefined") {
               var string_type = JSON.stringify(result.type);
@@ -124,21 +122,17 @@
         }, 1000);
         $("#keyboard-auto").click(function(e) {
           e.preventDefault();
-          if (!$("#keyboard-auto").hasClass("disabled")) {
-            if ($("#keyboard-auto").hasClass("active"))
-              callAjax("/cgi-bin/kstop");
-            else
-              callAjax("/cgi-bin/kstart");
-          }
+          if ($("#keyboard-auto").hasClass("active"))
+            callAjax("/cgi-bin/kstop");
+          else
+            callAjax("/cgi-bin/kstart");
         });
         $("#mouse-auto").click(function(e) {
           e.preventDefault();
-          if (!$("#mouse-auto").hasClass("disabled")) {
-            if ($("#mouse-auto").hasClass("active"))
-              callAjax("/cgi-bin/mstop");
-            else
-              callAjax("/cgi-bin/mstart");
-          }
+          if ($("#mouse-auto").hasClass("active"))
+            callAjax("/cgi-bin/mstop");
+          else
+            callAjax("/cgi-bin/mstart");
         });
 
         $("#showkeyboard").click(function(e) {
@@ -405,12 +399,6 @@
         background-color: #116662;
       }
 
-      .disabled {
-        cursor: default;
-        box-shadow: 0 9px #999;
-        background-color: grey !important;
-      }
-
       .result {
         padding: 5px;
         margin: 5px;
@@ -664,7 +652,7 @@
     <div class="flex between">
       <div class="flex">
         <div id="showkeyboard" class="button sk flex center">Keyboard</div>
-        <div id="keyboard-auto" class="button ak flex center disabled">
+        <div id="keyboard-auto" class="button ak flex center">
           <div>Auto</div>
         </div>
       </div>
@@ -673,7 +661,7 @@
       </div>
       <div class="flex">
         <div id="showmouse" class="button sm flex center">Mouse</div>
-        <div id="mouse-auto" class="button am flex center disabled">
+        <div id="mouse-auto" class="button am flex center">
           <div>Auto</div>
         </div>
       </div>
