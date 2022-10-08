@@ -8,6 +8,8 @@ cp /boot/dtb/sun8i-h3-orangepi-plus.dtb /boot/dtb/sun8i-h3-orangepi-plus.dtb.old
 
 dtc -I dtb /boot/dtb/sun8i-h3-orangepi-plus.dtb -O dts -o /boot/dtb/sun8i-h3-orangepi-plus.dts
 
+nano /boot/dtb/sun8i-h3-orangepi-plus.dts
+
 CTRL + W usb
 
 From 
@@ -45,7 +47,7 @@ TO
 
 dtc -I dts /boot/dtb/sun8i-h3-orangepi-plus.dts -O dtb -o /boot/dtb/sun8i-h3-orangepi-plus.dtb
 
-TO /boot/armbianEnv.txt ADD overlays=usbhost0
+ON /boot/armbianEnv.txt ADD overlays=usbhost0
 
 make hid_gadget_test
 
